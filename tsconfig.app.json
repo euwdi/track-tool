@@ -20,7 +20,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "paths": {
+      "@features/*": ["./src/features/*"],
+      "@common/*": ["./src/common/*"],
+      "@assets/*": ["./src/assets/*"]
+    },
+    "types": ["vite-plugin-svgr/client"]
   },
   "include": ["src"]
 }

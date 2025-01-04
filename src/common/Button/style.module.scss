@@ -1,4 +1,21 @@
-.same {
-  background-color: rgb(113, 27, 131);
-  width: 300px;
+@use "@styles/colors.scss" as *;
+
+.button {
+  padding: 8px 14px;
+
+  background-color: $button-color;
+
+  transition: background-color 0.5s ease-out;
+  border-radius: 20px;
+
+  border: none;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $button-hover-color;
+    box-shadow: 0 0 3px rgba(0, 0, 0);
+  }
 }

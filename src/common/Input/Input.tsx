@@ -1,10 +1,10 @@
 import { FC } from "react";
-import "./input.module.scss";
+import classes from "./input.module.scss";
 
-const Input: FC = () => {
+const Input: FC<React.InputHTMLAttributes<HTMLInputElement>> = (props) => {
   return (
     <>
-      <input className="same" />
+      <input className={classes.input} {...props} />
     </>
   );
 };

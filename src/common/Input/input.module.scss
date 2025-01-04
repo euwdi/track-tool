@@ -1,3 +1,17 @@
-.same {
-  background-color: rgb(113, 27, 131);
+@use "@styles/colors.scss" as *;
+
+.input {
+  padding: 10px;
+  background-color: $light-gray-color;
+  border-radius: 10px;
+
+  border: none;
+
+  &::placeholder {
+    color: #00000099;
+  }
+
+  &:hover {
+    background-color: #c1bcbc;
+  }
 }

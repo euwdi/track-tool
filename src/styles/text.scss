@@ -1,0 +1,9 @@
+@use "@styles/utils.scss" as *;
+
+h1 {
+  @include adaptiveFontSize(30, 38);
+}
+
+a {
+  @include adaptiveFontSize(12, 16);
+}

@@ -1,0 +1,14 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 40px;
+
+  .logo {
+    width: 200px;
+  }
+
+ // background-color: #62798d;
+}

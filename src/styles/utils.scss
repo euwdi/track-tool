@@ -1,0 +1,7 @@
+.full-width {
+  width: 100%;
+}
+
+@mixin adaptiveFontSize($min, $max) {
+  font-size: calc(#{$min}px + ($max - $min) * (100vw - 320px) / 880);
+}

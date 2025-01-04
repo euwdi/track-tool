@@ -1,19 +1,13 @@
-import "./App.css";
-import { Input } from "./common/Input/Input";
-import { Button } from "./common/Button/Button";
-import { FlexColumn } from "./common/ui/FlexColumn/FlexColumn";
+import "./styles/text.scss";
+import "./styles/utils.scss";
+import "./styles/root.scss";
+import { RouterProvider } from "react-router";
+import { mainRouter } from "./router/router";
 
 function App() {
   return (
     <>
-      <FlexColumn>
-        <Input />
-        <Button />
-      </FlexColumn>
-      <FlexColumn verticalCenter>
-        <Input />
-        <Button />
-      </FlexColumn>
+      <RouterProvider router={mainRouter} />
     </>
   );
 }

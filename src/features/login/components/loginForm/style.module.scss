@@ -1,0 +1,51 @@
+.container {
+  margin: 10px;
+
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+
+  background-color: #e5e5e5;
+
+  border-radius: 12px;
+  border: 1px solid #a9a9a9;
+
+  box-shadow: 0 0 5px #181619;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .fields-box {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #244977;
+    transition: color 0.3s ease;
+
+    text-shadow: 0 0 8px rgba(76, 102, 158, 0.577);
+
+    &:hover {
+      border-radius: 20px;
+      text-shadow: 0 0 10px rgba(55, 73, 114, 0.799);
+    }
+  }
+}

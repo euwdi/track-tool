@@ -1,17 +1,23 @@
 import { FC, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@common/Button/Button";
-import { Input } from "@common/Input/Input";
-import { NavLink } from "react-router";
-
+import { Button } from "@/common/Button/Button";
+import { Input } from "@/common/Input/Input";
+import { NavLink, useNavigate } from "react-router";
+import Logo from "@/assets/logo.svg?react";
+import { authService } from "@/network/authService";
 
 const LoginForm: FC = () => {
+  const navigator = useNavigate();
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const onSubmitClick = () => {
-    // Submit form logic here
-    console.log("submit");
+    if (login.trim() && password.trim()) {
+      console.log("submit");
+      authService.login(login, password);
+
+      navigator("/instruments");
+    }
   };
 
   return (
@@ -43,7 +49,12 @@ const LoginForm: FC = () => {
         />
       </div>
 
-      <Button text="Войти" fullWidth onClick={onSubmitClick} />
+      <Button
+        text="Войти"
+        fullWidth
+        onClick={onSubmitClick}
+        disabled={!login || !password}
+      />
 
       <div className={classes.row}>
         <NavLink to={""} className={classes.link}>
@@ -53,6 +64,8 @@ const LoginForm: FC = () => {
           Зарегистрироваться
         </NavLink>
       </div>
+
+      <Logo className={classes.logo} />
     </div>
   );
 };

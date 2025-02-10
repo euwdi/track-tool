@@ -1,4 +1,4 @@
-@use "@styles/colors.scss" as *;
+@use "@/styles/colors.scss" as *;
 
 .button {
   padding: 8px 14px;
@@ -12,10 +12,57 @@
 
   cursor: pointer;
 
-  &:hover,
-  &:focus,
-  &:active {
+  &:disabled {
+    background-color: $button-disabled-color;
+    cursor: inherit;
+  }
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
     background-color: $button-hover-color;
     box-shadow: 0 0 3px rgba(0, 0, 0);
+  }
+
+  &:not(:disabled):active {
+
+  }
+
+  @keyframes example {
+    0% {
+      transform: translate(0, 0);
+      background-color: #008cba;
+    }
+    25% {
+      transform: translate(150px, 150px);
+      background-color: #008cba;
+    }
+    50% {
+      transform: translate(300px, 0);
+      background-color: #99008c;
+    }
+    75% {
+      transform: translate(150px, -150px);
+      background-color: #008cba;
+    }
+    100% {
+      transform: translate(0, 0);
+      background-color: #008cba;
+    }
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+    transform-style: flat;
+    transform: translate3d(-50%,-50%,0);
+    background: rgba(white,.1);
+    border-radius: 100%;
+    transition: width .3s ease, height .3s ease;
   }
 }

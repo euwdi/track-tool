@@ -11,6 +11,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   color: #000000;
+
+  box-sizing: border-box;
 }
 
 html,
@@ -21,10 +23,14 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-
-  block-size: border-box;
 }
 
 button {
   width: fit-content;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

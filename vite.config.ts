@@ -4,10 +4,9 @@ import svgr from "vite-plugin-svgr";
 import { fileURLToPath } from "node:url";
 
 export default defineConfig({
-  // server: {
-  //   host: "192.168.0.103",
-  //   port: 3012,
-  // },
+  server: {
+    port: 3012,
+  },
   plugins: [react(), svgr()],
   resolve: {
     alias: {

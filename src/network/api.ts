@@ -9,7 +9,7 @@ const axios = axiosModule.create({
 
 axios.interceptors.request.use(
   (config) => {
-    const token = tokenService.getAccessToken(); // или другой способ хранения токена
+    const token = tokenService.getAccessToken(); 
     if (token) {
       config.headers!["Authorization"] = `Bearer ${token}`;
     }

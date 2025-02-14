@@ -1,20 +1,25 @@
 import { createBrowserRouter } from "react-router";
 import { LoginPage } from "@/features/login/page";
 import { Layout } from "@/common/layout/Layout";
-import { InstrumentsPage } from "@/features/instruments/InstrumentsPage";
+import { ToolsPage } from "@/features/tools/ToolsPage";
+
+export enum Routes {
+  LOGIN = "login",
+  TOOLS = "tools",
+}
 
 const mainRouter = createBrowserRouter([
   {
-    path: "login",
+    path: Routes.LOGIN,
     element: <LoginPage />,
   },
   {
     path: "*",
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
-        path: "instruments",
-        element: <InstrumentsPage />,
+        path: Routes.TOOLS,
+        element: <ToolsPage />,
       },
     ],
   },

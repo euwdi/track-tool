@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router";
 import { LoginPage } from "@/features/login/page";
 import { Layout } from "@/common/layout/Layout";
 import { ToolsPage } from "@/features/tools/ToolsPage";
+import { PublicRouteGuard } from "./PublicRouteGuard";
+import { RouteGuard } from "./RouteGuard";
 
 export enum Routes {
   LOGIN = "login",
@@ -11,27 +13,28 @@ export enum Routes {
 const mainRouter = createBrowserRouter([
   {
     path: Routes.LOGIN,
-    element: <LoginPage />,
-  },
-  {
-    path: "*",
-    element: <Layout />,
-    children: [
-      {
-        path: Routes.TOOLS,
-        element: <ToolsPage />,
-      },
-    ],
+    element: (
+      <PublicRouteGuard>
+        <LoginPage />
+      </PublicRouteGuard>
+    ),
   },
 
   {
-    path: "registration",
-    element: (() => <div>Home</div>)(),
-  },
-  //guard
-  {
     path: "*",
-    element: (() => <div>Home</div>)(),
+    element: <RouteGuard />,
+    children: [
+      {
+        path: "*",
+        element: <Layout />,
+        children: [
+          {
+            path: Routes.TOOLS,
+            element: <ToolsPage />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

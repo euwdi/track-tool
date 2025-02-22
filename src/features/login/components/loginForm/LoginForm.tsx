@@ -1,24 +1,31 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import classes from "./style.module.scss";
 import { Button } from "@/common/Button/Button";
 import { Input } from "@/common/Input/Input";
 import { NavLink, useNavigate } from "react-router";
 import Logo from "@/assets/logo.svg?react";
-import { authService } from "@/network/authService";
+import { Routes } from "@/router/router";
+import { useUserStore } from "@/stores/userStore";
 
 const LoginForm: FC = () => {
   const navigator = useNavigate();
+  const isAuth = useUserStore((state) => state.isAuth);
+  const { login: fetchLogin } = useUserStore((state) => state);
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const onSubmitClick = () => {
     if (login.trim() && password.trim()) {
       console.log("submit");
-      authService.login(login, password);
-
-      navigator("/instruments");
+      fetchLogin(login, password);
     }
   };
+
+  useEffect(() => {
+    if (isAuth) {
+      navigator(`/${Routes.TOOLS}`);
+    }
+  }, [isAuth, navigator]);
 
   return (
     <div

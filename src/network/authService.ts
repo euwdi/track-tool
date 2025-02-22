@@ -1,22 +1,16 @@
 import { axios } from "./api";
-import { tokenService } from "./tokenService";
 
 interface AuthResponse {
   token: string;
 }
 
 class AuthService {
-  public async login(login: string, password: string): Promise<void> {
-    try {
-      const response = await axios.post<AuthResponse>("/api/auth/login", {
-        login,
-        password,
-      });
-      tokenService.setAccessToken(response.data.token);
-    } catch (error) {
-      console.error("Authentication failed", error);
-      throw error;
-    }
+  public async login(login: string, password: string) {
+    const response = await axios.post<AuthResponse>("/api/auth/login", {
+      login,
+      password,
+    });
+    return response.data;
   }
   public logout() {
     localStorage.removeItem("token");

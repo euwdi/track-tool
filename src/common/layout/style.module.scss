@@ -1,8 +1,7 @@
 @use "@/styles/colors.scss" as *;
 
 .header {
-  height: 52px;
-  padding: 4px 40px;
+  padding: 8px 35px;
 
   display: flex;
   justify-content: space-between;
@@ -17,10 +16,10 @@
   }
 
   .logo {
-    height: 44px;
+    height: 36px;
 
     @media (max-width: 650px) {
-      height: 34px;
+      height: 26px;
     }
   }
 
@@ -46,8 +45,8 @@
     height: 34px;
 
     @media (max-width: 650px) {
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25x;
     }
   }
 }

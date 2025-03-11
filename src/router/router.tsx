@@ -4,10 +4,12 @@ import { Layout } from "@/common/layout/Layout";
 import { ToolsPage } from "@/features/tools/ToolsPage";
 import { PublicRouteGuard } from "./PublicRouteGuard";
 import { RouteGuard } from "./RouteGuard";
+import { MyToolsPage } from "@/features/myTools/MyToolsPage";
 
 export enum Routes {
   LOGIN = "login",
   TOOLS = "tools",
+  MY_TOOLS = "tools/me",
 }
 
 const mainRouter = createBrowserRouter([
@@ -31,6 +33,10 @@ const mainRouter = createBrowserRouter([
           {
             path: Routes.TOOLS,
             element: <ToolsPage />,
+          },
+          {
+            path: Routes.MY_TOOLS,
+            element: <MyToolsPage />,
           },
         ],
       },

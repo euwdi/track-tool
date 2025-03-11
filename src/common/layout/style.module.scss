@@ -9,6 +9,9 @@
 
   background-color: $header-color;
 
+  box-shadow: 0px -1px 2px 0px #2A2F7180 inset;
+
+
   @media (max-width: 650px) {
     height: 38px;
 

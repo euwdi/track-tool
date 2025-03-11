@@ -4,6 +4,8 @@ import classes from "./style.module.scss";
 type TProps = {
   headers: string[];
   data: string[][];
+  isEditable?: boolean;
+  isOpenable?: boolean;
 };
 
 const Table: FC<TProps> = ({ headers, data }) => {
@@ -16,10 +18,16 @@ const Table: FC<TProps> = ({ headers, data }) => {
           ))}
         </tr>
 
-        {data.map((trData) => (
+        {data.map((trData, index) => (
           <tr>
             {trData.map((tdData) => (
-              <td className={classes.tableCell}>{tdData}</td>
+              <td
+                className={`${classes.tableCell} ${
+                  index % 2 === 1 ? classes.gray : classes.white
+                }`}
+              >
+                {tdData}
+              </td>
             ))}
           </tr>
         ))}

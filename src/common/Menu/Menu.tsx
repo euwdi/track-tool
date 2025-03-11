@@ -22,7 +22,7 @@ const menuTabs: Tab[] = [
   {
     logo: <BagIcon />,
     title: "Мое оборудование",
-    link: "/orders",
+    link: "/tools/me",
   },
   {
     logo: <ToolsIcon />,

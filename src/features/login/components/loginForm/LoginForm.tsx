@@ -46,6 +46,7 @@ const LoginForm: FC = () => {
           onChange={(e) => {
             setLogin(e.target.value);
           }}
+          inputType="outline"
         />
         <Input
           placeholder="Пароль"
@@ -53,6 +54,7 @@ const LoginForm: FC = () => {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
+          inputType="outline"
         />
       </div>
 

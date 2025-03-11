@@ -1,25 +1,82 @@
+@use "@/styles/colors.scss" as *;
+
+$table-radius: 5px;
+$table-border: 1px solid $table-primary-color;
+$table-border-thin: 2px solid $table-primary-color;
+
 .table {
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0;
   color: #000000;
 
-  .table-header-cell {
-    width: 250px;
-    height: 50px;
-    padding: 15px 5px;
+  border-radius: $table-radius;
+  border-spacing: 0;
+  border: none;
 
-    font-weight: 600;
+  tr {
+    td,
+    th {
+      &:first-child {
+        border-left: $table-border-thin;
+      }
+      &:last-child {
+        border-right: $table-border-thin;
+      }
+    }
 
-    background-color: #d2d2d2;
+    &:first-child {
+      th {
+        border-top: $table-border-thin;
+        &:first-child {
+          border-top-left-radius: $table-radius;
+          border-left: $table-border-thin;
+        }
+        &:last-child {
+          border-top-right-radius: $table-radius;
+          border-right: $table-border-thin;
+        }
+      }
+    }
+
+    &:last-child {
+      td {
+        border-bottom: $table-border-thin;
+        &:first-child {
+          border-bottom-left-radius: $table-radius;
+        }
+        &:last-child {
+          border-bottom-right-radius: $table-radius;
+        }
+      }
+    }
+
+    .table-header-cell {
+      width: 250px;
+      padding: 15px 5px;
+
+      font-weight: 600;
+      text-align: left;
+
+      background-color: $table-primary-color;
+
+      border: $table-border;
+    }
+    .table-cell {
+      width: 250px;
+      padding: 15px 5px;
+
+      font-weight: 400;
+
+      border: $table-border;
+    }
   }
-  .table-cell {
-    width: 250px;
-    height: 50px;
-    padding: 15px 5px;
 
-    font-weight: 400;
+  .gray {
+    background-color: #d9d8d8;
+  }
 
+  .white {
     background-color: #ffffff;
   }
 }

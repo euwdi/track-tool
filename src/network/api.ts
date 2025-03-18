@@ -29,6 +29,13 @@ axios.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    if (
+      error.response.status === 401 &&
+      "/api/auth/refresh".includes(originalRequest.url)
+    ) {
+      return Promise.reject(error);
+    }
+
     // Проверяем, что ошибка связана с истекшим access токеном
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -52,13 +59,8 @@ axios.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axios(originalRequest);
       } catch (refreshError) {
-        // Если обновление токена не удалось, перенаправляем на страницу входа
         useUserStore().logout();
-        console.log("Access token");
-        
-
         window.location.href = "/auth";
-        return Promise.reject(refreshError);
       }
     }
 

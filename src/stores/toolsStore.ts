@@ -7,6 +7,15 @@ interface ToolsState {
   myTools: Tool[];
   getTools: () => void;
   getMyTools: () => void;
+  createTool: ({
+    name,
+    type,
+    storageId,
+  }: {
+    name: string;
+    type: string;
+    storageId: string;
+  }) => void;
 }
 
 const useToolsStore = create<ToolsState>()((set) => ({
@@ -24,6 +33,13 @@ const useToolsStore = create<ToolsState>()((set) => ({
     try {
       const myTools = await toolsService.getMyTools();
       set(() => ({ myTools }));
+    } catch (err) {
+      console.error("get tools failed", err);
+    }
+  },
+  createTool: async ({ name, type, storageId }) => {
+    try {
+       await toolsService.createTool({ name, type, storageId });
     } catch (err) {
       console.error("get tools failed", err);
     }

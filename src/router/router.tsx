@@ -5,11 +5,13 @@ import { ToolsPage } from "@/features/tools/ToolsPage";
 import { PublicRouteGuard } from "./PublicRouteGuard";
 import { RouteGuard } from "./RouteGuard";
 import { MyToolsPage } from "@/features/myTools/MyToolsPage";
+import { StoragesPage } from "@/features/storages/StoragesPage";
 
 export enum Routes {
   LOGIN = "login",
   TOOLS = "tools",
   MY_TOOLS = "tools/me",
+  STORAGES = "storages",
 }
 
 const mainRouter = createBrowserRouter([
@@ -37,6 +39,10 @@ const mainRouter = createBrowserRouter([
           {
             path: Routes.MY_TOOLS,
             element: <MyToolsPage />,
+          },
+          {
+            path: Routes.STORAGES,
+            element: <StoragesPage />,
           },
         ],
       },

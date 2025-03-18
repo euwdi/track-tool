@@ -4,14 +4,13 @@ import { tokenService } from "@/network/tokenService";
 import { Navigate, Outlet } from "react-router";
 
 const RouteGuard: FC<PropsWithChildren> = () => {
-  return <Outlet />;
-  // const isToken = tokenService.isAccessToken();
+  const isToken = tokenService.isAccessToken();
 
-  // if (isToken) {
-  //   return <Outlet />;
-  // }
+  if (isToken) {
+    return <Outlet />;
+  }
 
-  // return <Navigate to={`/${Routes.LOGIN}`} />;
+  return <Navigate to={`/${Routes.LOGIN}`} />;
 };
 
 export { RouteGuard };

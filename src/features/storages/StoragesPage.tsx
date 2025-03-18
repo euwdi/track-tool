@@ -3,36 +3,32 @@ import classes from "./style.module.scss";
 import { Button } from "@/common/Button/Button";
 import { Input } from "@/common/Input/Input";
 import { Table } from "@/common/Table/Table";
-import { useToolsStore } from "@/stores/toolsStore";
 import { Modal } from "@/common/Modal/Modal";
 import { CreateToolModal } from "../createToolModal/CreateToolModal";
+import { useStoragesStore } from "@/stores/storagesStore";
+import { CreateStorageModal } from "../createStorageModal/createStorageModal";
 
-const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
-  const { getTools, tools } = useToolsStore();
+const StoragesPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
+  const { getStorages, storages } = useStoragesStore();
   const [filterText, setFilterText] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    getTools();
+    getStorages();
   }, []);
 
   const tableData = useMemo(() => {
-    return tools
-      .filter((tool) =>
-        tool.name.toLowerCase().includes(filterText.toLowerCase())
+    return storages
+      .filter((storage) =>
+        storage.name.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((tool) => [tool.name, tool.description, tool.status]);
-  }, [filterText, tools]);
+      .map((tool) => [tool.name, tool.address]);
+  }, [filterText, storages]);
   const canAddTools = false;
-
-  const onClickAddTool = () => {};
 
   return (
     <div className={classes.container}>
-      <div className={classes.topContainer}>
-        Оборудование
-        {canAddTools && <Button onClick={() => {}} />}
-      </div>
+      <div className={classes.topContainer}>Склады</div>
 
       <div className={classes.row}>
         <Input
@@ -53,7 +49,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       </div>
 
       <Table
-        headers={["Наименование", "Описание", "Статус"]}
+        headers={["Название", "Адрес"]}
         data={
           tableData
           //   [
@@ -69,7 +65,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           setModalIsOpen(false);
         }}
       >
-        <CreateToolModal
+        <CreateStorageModal
           onCloseModal={() => {
             setModalIsOpen(false);
           }}
@@ -79,4 +75,4 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   );
 };
 
-export { ToolsPage };
+export { StoragesPage };

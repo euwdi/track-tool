@@ -6,6 +6,7 @@ import ToolsIcon from "@/assets/tools.svg?react";
 import WarehouseIcon from "@/assets/warehouse.svg?react";
 import { useNavigate } from "react-router";
 import { Routes } from "@/router/router";
+import { useUserStore } from "@/stores/userStore";
 
 type Tab = {
   logo: ReactElement;
@@ -32,12 +33,14 @@ const menuTabs: Tab[] = [
   {
     logo: <WarehouseIcon />,
     title: "Склады",
-    link: "/warehouses",
+    link: "/storages",
   },
 ];
 
 const Menu: FC = () => {
   const navigator = useNavigate();
+  const { logout } = useUserStore();
+  
   return (
     <>
       <div className={classes.container}>
@@ -50,6 +53,9 @@ const Menu: FC = () => {
             {item.logo} {item.title}
           </button>
         ))}
+        <button className={classes.menuItem} onClick={logout}>
+          Выход
+        </button>
       </div>
     </>
   );

@@ -10,7 +10,7 @@ class ToolsService {
   }
 
   public async getMyTools() {
-    const response = await axios.get<Tool[]>("/api/users/current/tools");
+    const response = await axios.get<Tool[]>("/api/tools/me");
     console.log(response.data);
 
     return response.data;

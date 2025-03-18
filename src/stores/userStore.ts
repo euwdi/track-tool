@@ -6,6 +6,7 @@ interface UserState {
   isAuth: boolean;
   isLoading: boolean;
   login: (login: string, password: string) => void;
+  logout: () => void;
 }
 
 const useUserStore = create<UserState>()((set) => ({
@@ -15,13 +16,21 @@ const useUserStore = create<UserState>()((set) => ({
     set(() => ({ isLoading: true }));
 
     try {
-      const { token } = await authService.login(login, password);
+      const { accessToken, refreshToken } = await authService.login(
+        login,
+        password
+      );
       set(() => ({ isAuth: true }));
-      tokenService.setAccessToken(token);
+      tokenService.setAccessToken(accessToken);
+      tokenService.setRefreshToken(refreshToken);
     } catch (err) {
       console.error("Authentication failed", err);
       set(() => ({ isLoading: false }));
     }
+  },
+  logout: () => {
+    set(() => ({ isAuth: false }));
+    tokenService.clear();
   },
 }));
 

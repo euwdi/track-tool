@@ -23,7 +23,7 @@ const LoginForm: FC = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigator(`/${Routes.TOOLS}`);
+      navigator(`/${Routes.MY_TOOLS}`);
     }
   }, [isAuth, navigator]);
 

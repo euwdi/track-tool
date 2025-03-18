@@ -1,15 +1,25 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import classes from "./style.module.scss";
 import { Button } from "@/common/Button/Button";
 import { Input } from "@/common/Input/Input";
 import { Table } from "@/common/Table/Table";
-import { toolsService } from "@/network/toolsService";
+import { useToolsStore } from "@/stores/toolsStore";
 
 const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
+  const { getMyTools, myTools } = useToolsStore();
+  const [filterText, setFilterText] = useState("");
+
   useEffect(() => {
-    toolsService.getMyTools();
+    getMyTools();
   }, []);
 
+  const tableData = useMemo(() => {
+    return myTools
+      .filter((tool) =>
+        tool.name.toLowerCase().includes(filterText.toLowerCase())
+      )
+      .map((tool) => [tool.name, tool.description]);
+  }, [filterText, myTools]);
   const canAddTools = false;
 
   return (
@@ -18,14 +28,24 @@ const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         Моё оборудование
         {canAddTools && <Button onClick={() => {}} />}
       </div>
-      <Input placeholder="Поиск по наименованию" inputType="outline" />
+      <Input
+        placeholder="Поиск по наименованию"
+        inputType="outline"
+        value={filterText}
+        onChange={(e) => {
+          setFilterText(e.target.value);
+        }}
+      />
 
       <Table
-        headers={["Наименование", "Марка", "Состояние", "Категория", "Инв. №"]}
-        data={[
-          ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
-          ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
-        ]}
+        headers={["Наименование", "Описание"]}
+        data={
+          tableData
+          //   [
+          //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
+          //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
+          // ]
+        }
       />
     </div>
   );

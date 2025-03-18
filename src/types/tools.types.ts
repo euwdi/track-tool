@@ -1,10 +1,16 @@
+import { StatusesTitles } from "@/features/tools/types";
+
 export type Tool = {
   id: string;
   description: string;
-  is_canceled: boolean;
+  status: StatusesTitles;
   name: string;
-  register_date: string;
-  start_date: string;
-  storage_id: string;
-  type_id: string;
+  registerDate: string;
+  startDate: string;
+  cancelDate: string;
+  storageId: string;
+  type: {
+    id: string;
+    description: string;
+  };
 };

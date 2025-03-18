@@ -6,6 +6,7 @@ interface ToolsState {
   tools: Tool[];
   myTools: Tool[];
   getTools: () => void;
+  getMyTools: () => void;
 }
 
 const useToolsStore = create<ToolsState>()((set) => ({

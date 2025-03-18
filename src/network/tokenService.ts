@@ -26,6 +26,10 @@ class TokenService {
     return token;
   };
 
+  clearAccessToken = () => {
+    localStorage.removeItem(Tokens.accessToken);
+  };
+
   clear = () => {
     localStorage.removeItem(Tokens.accessToken);
     localStorage.removeItem(Tokens.refreshToken);

@@ -33,7 +33,8 @@ axios.interceptors.response.use(
       error.response.status === 401 &&
       "/api/auth/refresh".includes(originalRequest.url)
     ) {
-      return Promise.reject(error);
+      useUserStore().logout();
+      window.location.href = "/auth";
     }
 
     // Проверяем, что ошибка связана с истекшим access токеном

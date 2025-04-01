@@ -1,0 +1,46 @@
+/* Dropdown.module.scss */
+
+.dropdown {
+    position: relative;
+    width: 200px;
+  
+    button {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+      text-align: left;
+      font-size: 14px;
+  
+      &:hover {
+        background-color: #f9f9f9;
+      }
+    }
+  
+    ul {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      z-index: 1000;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  
+      li {
+        padding: 8px;
+        cursor: pointer;
+        font-size: 14px;
+  
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+  }

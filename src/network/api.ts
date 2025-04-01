@@ -59,7 +59,7 @@ axios.interceptors.response.use(
         // Повторяем оригинальный запрос с новым access токеном
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return axios(originalRequest);
-      } catch (refreshError) {
+      } catch {
         useUserStore().logout();
         window.location.href = "/auth";
       }

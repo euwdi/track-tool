@@ -18,7 +18,7 @@ const menuTabs: Tab[] = [
   {
     logo: <EmpsIcon />,
     title: "Сотрудники",
-    link: "/employees",
+    link: "/users",
   },
   {
     logo: <BagIcon />,
@@ -40,7 +40,7 @@ const menuTabs: Tab[] = [
 const Menu: FC = () => {
   const navigator = useNavigate();
   const { logout } = useUserStore();
-  
+
   return (
     <>
       <div className={classes.container}>

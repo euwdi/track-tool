@@ -1,0 +1,35 @@
+.container {
+  padding: 50px;
+
+  height: 100%;
+
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 30px;
+
+  background-color: #f5f5f5;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  button {
+    width: 100px;
+  }
+
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 0%;
+  }
+}

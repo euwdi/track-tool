@@ -10,6 +10,7 @@ import { Loader } from "./common/Loader/Loader";
 
 function App() {
   const [profileLoaded, setProfileLoaded] = useState<boolean>();
+  const [loadComplete, setLoadComplete] = useState<boolean>();
   const { isAuth, getProfile } = useUserStore();
 
   useEffect(() => {
@@ -29,6 +30,20 @@ function App() {
     }
   }, [isAuth]);
 
+  if (loadComplete)
+    return (
+      <div
+        style={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader text />
+      </div>
+    );
+
   if (!profileLoaded)
     return (
       <div
@@ -44,9 +59,15 @@ function App() {
     );
 
   return (
-    <>
+    <div
+      onKeyDown={() => {
+        if (event.key === "Delete") {
+          setLoadComplete(!loadComplete);
+        }
+      }}
+    >
       <RouterProvider router={mainRouter} />
-    </>
+    </div>
   );
 }
 

@@ -1,81 +1,8 @@
 @use "@/styles/colors.scss" as *;
 
 .loader {
-  // position: relative;
-  // width: 60px;
-  // height: 60px;
 
-  // --bgcolor: rgb(255, 0, 0);
 
-  // :nth-child(1) {
-  //   position: absolute;
-  //   top: 50%;
-  //   width: 60px;
-  //   height: 3px;
-  //   background-color: var(--bgcolor);
-  // }
-
-  // :nth-child(2) {
-  //   position: absolute;
-  //   top: 50%;
-  //   width: 60px;
-  //   height: 3px;
-  //   background-color: var(--bgcolor);
-
-  //   transform: rotate(90deg);
-  // }
-
-  // :nth-child(3) {
-  //   position: absolute;
-  //   top: 44px;
-  //   right: -15px;
-
-  //   width: 30px;
-  //   height: 3px;
-  //   background-color: var(--bgcolor);
-
-  //   transform: rotate(90deg);
-  // }
-
-  // :nth-child(4) {
-  //   position: absolute;
-  //   bottom: -2px;
-  //   left: 0;
-
-  //   width: 30px;
-  //   height: 3px;
-  //   background-color: var(--bgcolor);
-  // }
-
-  // :nth-child(5) {
-  //   position: absolute;
-  //   bottom: 41px;
-  //   left: -15px;
-
-  //   width: 30px;
-  //   height: 3px;
-  //   background-color: var(--bgcolor);
-  //   transform: rotate(90deg);
-  // }
-  // :nth-child(6) {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 29px;
-
-  //   width: 30px;
-  //   height: 3px;
-  //   background-color: var(--bgcolor);
-  // }
-
-  // animation: l28 1s infinite linear;
-  // @keyframes l28 {
-  //   100% {
-  //     transform: rotate(1turn);
-  //   }
-  // }
-
-  /* HTML: <div class="loader"></div> */
-  /* HTML: <div class="loader"></div> */
   & {
     width: 20px;
     aspect-ratio: 1;
@@ -101,6 +28,81 @@
   @keyframes l13-1 {
     100% {
       transform: translate(0.5px);
+    }
+  }
+}
+
+.loader-text {
+  position: relative;
+  width: 60px;
+  height: 60px;
+
+  --bgcolor: rgb(255, 0, 0);
+
+  :nth-child(1) {
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 3px;
+    background-color: var(--bgcolor);
+  }
+
+  :nth-child(2) {
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 3px;
+    background-color: var(--bgcolor);
+
+    transform: rotate(90deg);
+  }
+
+  :nth-child(3) {
+    position: absolute;
+    top: 44px;
+    right: -15px;
+
+    width: 30px;
+    height: 3px;
+    background-color: var(--bgcolor);
+
+    transform: rotate(90deg);
+  }
+
+  :nth-child(4) {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+
+    width: 30px;
+    height: 3px;
+    background-color: var(--bgcolor);
+  }
+
+  :nth-child(5) {
+    position: absolute;
+    bottom: 41px;
+    left: -15px;
+
+    width: 30px;
+    height: 3px;
+    background-color: var(--bgcolor);
+    transform: rotate(90deg);
+  }
+  :nth-child(6) {
+    position: absolute;
+    top: 0;
+    left: 29px;
+
+    width: 30px;
+    height: 3px;
+    background-color: var(--bgcolor);
+  }
+
+  animation: l28 1s infinite linear;
+  @keyframes l28 {
+    100% {
+      transform: rotate(1turn);
     }
   }
 }

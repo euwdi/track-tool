@@ -6,6 +6,7 @@ import { mainRouter } from "./router/router";
 import { useEffect, useState } from "react";
 import { tokenService } from "./network/tokenService";
 import { useUserStore } from "./stores/userStore";
+import { Loader } from "./common/Loader/Loader";
 
 function App() {
   const [profileLoaded, setProfileLoaded] = useState<boolean>();
@@ -30,10 +31,16 @@ function App() {
 
   if (!profileLoaded)
     return (
-      <span>ЗАГРУЗКА</span>
-      // <Container>
-      //   <Preloader backgroundColor="#3E414B" size={140}></Preloader>
-      // </Container>
+      <div
+        style={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader />
+      </div>
     );
 
   return (

@@ -1,0 +1,106 @@
+@use "@/styles/colors.scss" as *;
+
+.loader {
+  // position: relative;
+  // width: 60px;
+  // height: 60px;
+
+  // --bgcolor: rgb(255, 0, 0);
+
+  // :nth-child(1) {
+  //   position: absolute;
+  //   top: 50%;
+  //   width: 60px;
+  //   height: 3px;
+  //   background-color: var(--bgcolor);
+  // }
+
+  // :nth-child(2) {
+  //   position: absolute;
+  //   top: 50%;
+  //   width: 60px;
+  //   height: 3px;
+  //   background-color: var(--bgcolor);
+
+  //   transform: rotate(90deg);
+  // }
+
+  // :nth-child(3) {
+  //   position: absolute;
+  //   top: 44px;
+  //   right: -15px;
+
+  //   width: 30px;
+  //   height: 3px;
+  //   background-color: var(--bgcolor);
+
+  //   transform: rotate(90deg);
+  // }
+
+  // :nth-child(4) {
+  //   position: absolute;
+  //   bottom: -2px;
+  //   left: 0;
+
+  //   width: 30px;
+  //   height: 3px;
+  //   background-color: var(--bgcolor);
+  // }
+
+  // :nth-child(5) {
+  //   position: absolute;
+  //   bottom: 41px;
+  //   left: -15px;
+
+  //   width: 30px;
+  //   height: 3px;
+  //   background-color: var(--bgcolor);
+  //   transform: rotate(90deg);
+  // }
+  // :nth-child(6) {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 29px;
+
+  //   width: 30px;
+  //   height: 3px;
+  //   background-color: var(--bgcolor);
+  // }
+
+  // animation: l28 1s infinite linear;
+  // @keyframes l28 {
+  //   100% {
+  //     transform: rotate(1turn);
+  //   }
+  // }
+
+  /* HTML: <div class="loader"></div> */
+  /* HTML: <div class="loader"></div> */
+  & {
+    width: 20px;
+    aspect-ratio: 1;
+    animation: l13-0 2s linear infinite;
+  }
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(at 30% 30%, #0000, #000a) red;
+    animation: l13-1 0.5s cubic-bezier(0.5, -500, 0.5, 500) infinite;
+  }
+  &::after {
+    animation-delay: -0.15s;
+  }
+  @keyframes l13-0 {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes l13-1 {
+    100% {
+      transform: translate(0.5px);
+    }
+  }
+}

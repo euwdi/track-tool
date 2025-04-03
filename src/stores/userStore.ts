@@ -1,12 +1,16 @@
 import { authService } from "@/network/authService";
 import { tokenService } from "@/network/tokenService";
+import { usersService } from "@/network/usersService";
+import { User } from "@/types/users.types";
 import { create } from "zustand";
 
 interface UserState {
   isAuth: boolean;
   isLoading: boolean;
+  profile: User;
   login: (login: string, password: string) => void;
   logout: () => void;
+  getProfile: () => void;
 }
 
 const useUserStore = create<UserState>()((set) => ({
@@ -20,9 +24,12 @@ const useUserStore = create<UserState>()((set) => ({
         login,
         password
       );
-      set(() => ({ isAuth: true }));
       tokenService.setAccessToken(accessToken);
       tokenService.setRefreshToken(refreshToken);
+
+      const profile = await usersService.getMyUser();
+
+      set(() => ({ isAuth: true, profile, isLoading: false }));
     } catch (err) {
       console.error("Authentication failed", err);
       set(() => ({ isLoading: false }));
@@ -32,6 +39,15 @@ const useUserStore = create<UserState>()((set) => ({
     set(() => ({ isAuth: false }));
     tokenService.clear();
   },
+  getProfile: async () => {
+    try {
+      const profile = await usersService.getMyUser();
+      set(() => ({ profile, isAuth: true }));
+    } catch (err) {
+      console.error("getProfile failed", err);
+    }
+  },
+  profile: {} as User,
 }));
 
 export { useUserStore };

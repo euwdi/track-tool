@@ -10,13 +10,12 @@ import { useUserStore } from "@/stores/userStore";
 const LoginForm: FC = () => {
   const navigator = useNavigate();
   const isAuth = useUserStore((state) => state.isAuth);
-  const { login: fetchLogin } = useUserStore((state) => state);
+  const { login: fetchLogin, getProfile } = useUserStore((state) => state);
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const onSubmitClick = () => {
     if (login.trim() && password.trim()) {
-      console.log("submit");
       fetchLogin(login, password);
     }
   };

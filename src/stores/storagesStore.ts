@@ -6,16 +6,6 @@ interface StoragesState {
   storages: Storage[];
   getStorages: () => void;
   createStorage: ({ name, address }: { name: string; address: string }) => void;
-  // getMyTools: () => void;
-  // createTool: ({
-  //   name,
-  //   type,
-  //   storageId,
-  // }: {
-  //   name: string;
-  //   type: string;
-  //   storageId: string;
-  // }) => void;
 }
 
 const useStoragesStore = create<StoragesState>()((set) => ({

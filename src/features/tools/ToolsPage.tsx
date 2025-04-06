@@ -6,6 +6,7 @@ import { Table } from "@/common/Table/Table";
 import { useToolsStore } from "@/stores/toolsStore";
 import { Modal } from "@/common/Modal/Modal";
 import { CreateToolModal } from "../createToolModal/CreateToolModal";
+import { statusMapping } from "./types";
 
 const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   const { getTools, tools } = useToolsStore();
@@ -21,7 +22,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((tool) => [tool.name, tool.description, tool.status]);
+      .map((tool) => [tool.name, tool.description, statusMapping[tool.status]]);
   }, [filterText, tools]);
   const canAddTools = false;
 

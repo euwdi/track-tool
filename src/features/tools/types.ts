@@ -1,25 +1,9 @@
-export enum StatusesTitles {
-  AVAILABLE = "available",
-  BUSY = "busy",
-  CANCELED = "canceled",
-}
+// Определяем типы статусов
+type ToolStatus = 'available' | 'busy' | 'canceled';
 
-export type Status = {
-  title: StatusesTitles;
-  spec: string;
+// Создаем маппинг статусов на человекочитаемые значения
+export const statusMapping: Record<ToolStatus, string> = {
+  available: 'Доступен',
+  busy: 'В работе',
+  canceled: 'Списан',
 };
-
-export const STATUSES = [
-  {
-    title: StatusesTitles.AVAILABLE,
-    spec: "Доступно",
-  },
-  {
-    title: StatusesTitles.BUSY,
-    spec: "В работе",
-  },
-  {
-    title: StatusesTitles.CANCELED,
-    spec: "Списано",
-  },
-];

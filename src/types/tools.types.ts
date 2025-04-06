@@ -1,6 +1,7 @@
 import { StatusesTitles } from "@/features/tools/types";
 
 export type Tool = {
+  tool: any;
   id: string;
   description: string;
   status: StatusesTitles;

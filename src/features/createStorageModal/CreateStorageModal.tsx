@@ -52,14 +52,17 @@ const CreateStorageModal: FC<Props> = ({ onCloseModal }) => {
       />
 
       <div className={classes.row}>
-        <Button text="Отменить" fullWidth onClick={onCloseModal} />
+        <Button fullWidth onClick={onCloseModal}>
+          Отменить
+        </Button>
         <Button
-          text="Сохранить"
           fullWidth
           onClick={() => {
             onClickCreateStorage();
           }}
-        />
+        >
+          Сохранить
+        </Button>
       </div>
     </div>
   );

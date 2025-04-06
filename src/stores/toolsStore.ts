@@ -5,22 +5,32 @@ import { create } from "zustand";
 interface ToolsState {
   tools: Tool[];
   myTools: Tool[];
+  moveToolId: string | undefined;
+  setMoveToolId: (toolId: string | undefined) => void;
   getTools: () => void;
   getMyTools: () => void;
   createTool: ({
     name,
-    type,
+    typeId,
     storageId,
   }: {
     name: string;
-    type: string;
+    typeId: string;
     storageId: string;
+  }) => void;
+  moveTool: ({
+    toolId,
+    toStorageId,
+  }: {
+    toolId: string;
+    toStorageId: string;
   }) => void;
 }
 
 const useToolsStore = create<ToolsState>()((set) => ({
   tools: [],
   myTools: [],
+  moveToolId: undefined,
   getTools: async () => {
     try {
       const tools = await toolsService.getTools();
@@ -37,12 +47,23 @@ const useToolsStore = create<ToolsState>()((set) => ({
       console.error("get tools failed", err);
     }
   },
-  createTool: async ({ name, type, storageId }) => {
+  createTool: async ({ name, typeId, storageId }) => {
     try {
-       await toolsService.createTool({ name, type, storageId });
+      await toolsService.createTool({ name, typeId, storageId });
     } catch (err) {
-      console.error("get tools failed", err);
+      console.error("createTool failed", err);
     }
+  },
+
+  moveTool: async ({ toolId, toStorageId }) => {
+    try {
+      await toolsService.moveTool({ toolId, toStorageId });
+    } catch (err) {
+      console.error("moveTool failed", err);
+    }
+  },
+  setMoveToolId: (moveToolId) => {
+    set(() => ({ moveToolId }));
   },
 }));
 

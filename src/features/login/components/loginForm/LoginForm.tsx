@@ -57,12 +57,9 @@ const LoginForm: FC = () => {
         />
       </div>
 
-      <Button
-        text="Войти"
-        fullWidth
-        onClick={onSubmitClick}
-        disabled={!login || !password}
-      />
+      <Button fullWidth onClick={onSubmitClick} disabled={!login || !password}>
+        Войти
+      </Button>
 
       <div className={classes.row}>
         <NavLink to={""} className={classes.link}>

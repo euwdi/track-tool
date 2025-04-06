@@ -1,6 +1,5 @@
 import { Tool } from "@/types/tools.types";
 import { axios } from "./api";
-import { StatusesTitles } from "@/features/tools/types";
 
 class ToolsService {
   public async getTools() {
@@ -17,30 +16,43 @@ class ToolsService {
 
   public async createTool({
     name,
-    type,
+    typeId,
     storageId,
   }: {
     name: string;
-    type: string;
+    typeId: string;
     storageId: string;
   }) {
     const response = await axios.post("/api/tools", {
       name,
-      type,
-      storage_id: storageId,
-      status: StatusesTitles.AVAILABLE,
+      description: name,
+      typeId,
+      storageId,
+      startDate: new Date(),
     });
 
-    // "name": "string",
-    // "type": "string",
-    // "storage_id": 0,
-    // "status": "string",
-    // "children_ids": [
-    //   "string"
-    // ],
-    // "transfers_ids": [
-    //   "string"
-    // ]
+    // {
+    //   "name": "string",
+    //   "description": "string",
+    //   "typeId": "string",
+    //   "startDate": "2025-04-06T12:41:06.666Z",
+    //   "storageId": "string"
+    // }
+
+    return response.data;
+  }
+
+  public async moveTool({
+    toolId,
+    toStorageId,
+  }: {
+    toolId: string;
+    toStorageId: string;
+  }) {
+    const response = await axios.patch(`/api/tools/${toolId}`, {
+      toStorageId
+    });
+
     return response.data;
   }
 }

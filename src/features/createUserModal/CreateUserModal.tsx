@@ -108,7 +108,7 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
           setPhone(e.target.value);
         }}
       />
-      
+
       <Input
         placeholder="Дата трудоустройства"
         inputType="outline"
@@ -119,14 +119,17 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
       />
 
       <div className={classes.row}>
-        <Button text="Отменить" fullWidth onClick={onCloseModal} />
+        <Button fullWidth onClick={onCloseModal}>
+          Отменить
+        </Button>
         <Button
-          text="Добавить"
           fullWidth
           onClick={() => {
             onClickCreateUser();
           }}
-        />
+        >
+          Добавить
+        </Button>
       </div>
     </div>
   );

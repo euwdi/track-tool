@@ -22,7 +22,7 @@ const StoragesPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .filter((storage) =>
         storage.name.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((tool) => [tool.name, tool.address]);
+      .map((tool) => ({ fields: [tool.name, tool.address] }));
   }, [filterText, storages]);
   const canAddTools = false;
 

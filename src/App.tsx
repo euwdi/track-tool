@@ -60,11 +60,11 @@ function App() {
 
   return (
     <div
-      onKeyDown={() => {
-        if (event.key === "Delete") {
-          setLoadComplete(!loadComplete);
-        }
-      }}
+        onKeyDown={() => {
+          if (event.key === "Delete") {
+            setLoadComplete(!loadComplete);
+          }
+        }}
     >
       <RouterProvider router={mainRouter} />
     </div>

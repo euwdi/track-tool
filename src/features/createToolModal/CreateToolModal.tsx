@@ -12,11 +12,11 @@ type Props = {
 const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
   const { createTool } = useToolsStore();
   const onClickCreateTool = () => {
-    createTool({ name, type, storageId });
+    createTool({ name, typeId: type, storageId });
     // onCloseModal();
   };
   const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState("653f8e1b1c9d440000a1b2d0");
   const [storageId, setStorageId] = useState("67a3178a49f85d137a6bb738");
 
   // const [filterText, setFilterText] = useState("");
@@ -54,14 +54,18 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
       />
 
       <div className={classes.row}>
-        <Button text="Отменить" fullWidth onClick={onCloseModal} />
+        <Button fullWidth onClick={onCloseModal}>
+          Отменить
+        </Button>
+
         <Button
-          text="Сохранить"
           fullWidth
           onClick={() => {
             onClickCreateTool();
           }}
-        />
+        >
+          Сохранить
+        </Button>
       </div>
     </div>
   );

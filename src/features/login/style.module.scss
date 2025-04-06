@@ -1,5 +1,5 @@
 .page {
-  height: 100%;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -7,6 +7,4 @@
   align-items: center;
 
   gap: 40px;
-
-  // background-color: #62798d;
 }

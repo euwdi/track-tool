@@ -1,14 +1,18 @@
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 import classes from "./style.module.scss";
 
 type Props = {
   onClick: () => void;
-  text?: string;
   fullWidth?: boolean;
   disabled?: boolean;
 };
 
-const Button: FC<Props> = ({ text, fullWidth, onClick, disabled }) => {
+const Button: FC<PropsWithChildren<Props>> = ({
+  children,
+  fullWidth,
+  onClick,
+  disabled,
+}) => {
   return (
     <>
       <button
@@ -16,8 +20,8 @@ const Button: FC<Props> = ({ text, fullWidth, onClick, disabled }) => {
         onClick={onClick}
         disabled={disabled}
       >
-        {text}
-        <div className={classes.ripple}/>
+        {children}
+        <div className={classes.ripple} />
       </button>
     </>
   );

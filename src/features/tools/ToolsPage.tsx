@@ -7,11 +7,13 @@ import { useToolsStore } from "@/stores/toolsStore";
 import { Modal } from "@/common/Modal/Modal";
 import { CreateToolModal } from "../createToolModal/CreateToolModal";
 import { statusMapping } from "./types";
+import { MoveToolModal } from "../moveToolModal/MoveToolModal";
 
 const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
-  const { getTools, tools } = useToolsStore();
+  const { getTools, tools, setMoveToolId } = useToolsStore();
   const [filterText, setFilterText] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [moveModalIsOpen, setMoveModalIsOpen] = useState(false);
 
   useEffect(() => {
     getTools();
@@ -22,7 +24,13 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((tool) => [tool.name, tool.description, statusMapping[tool.status]]);
+      .map((tool) => ({
+        fields: [tool.name, tool.description, statusMapping[tool.status]],
+        onClickMove: () => {
+          setMoveToolId(tool.id);
+          setMoveModalIsOpen(true);
+        },
+      }));
   }, [filterText, tools]);
   const canAddTools = false;
 
@@ -45,12 +53,13 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           }}
         />
         <Button
-          text="Добавить"
           fullWidth
           onClick={() => {
             setModalIsOpen(true);
           }}
-        />
+        >
+          Добавить
+        </Button>
       </div>
 
       <Table
@@ -62,6 +71,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
           // ]
         }
+        isMoveble
       />
 
       <Modal
@@ -73,6 +83,19 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         <CreateToolModal
           onCloseModal={() => {
             setModalIsOpen(false);
+          }}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={moveModalIsOpen}
+        onClose={() => {
+          setMoveModalIsOpen(false);
+        }}
+      >
+        <MoveToolModal
+          onCloseModal={() => {
+            setMoveModalIsOpen(false);
           }}
         />
       </Modal>

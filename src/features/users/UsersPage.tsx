@@ -21,12 +21,14 @@ const UsersPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .filter((user) =>
         user.lastName.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((user) => [
-        user.lastName + " " + user.firstName + " " + user.middleName,
-        user.title,
-        user.roleName,
-        user.phone,
-      ]);
+      .map((user) => ({
+        fields: [
+          user.lastName + " " + user.firstName + " " + user.middleName,
+          user.title,
+          user.roleName,
+          user.phone,
+        ],
+      }));
   }, [filterText, users]);
   const canAddUsers = true;
 
@@ -44,12 +46,13 @@ const UsersPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         />
         {canAddUsers && (
           <Button
-            text="Добавить"
             fullWidth
             onClick={() => {
               setModalIsOpen(true);
             }}
-          />
+          >
+            Добавить
+          </Button>
         )}
       </div>
 

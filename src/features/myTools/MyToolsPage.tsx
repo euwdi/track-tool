@@ -18,7 +18,7 @@ const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((tool) => [tool.name, tool.description]);
+      .map((tool) => ({ fields: [tool.name, tool.description] }));
   }, [filterText, myTools]);
   const canAddTools = false;
 

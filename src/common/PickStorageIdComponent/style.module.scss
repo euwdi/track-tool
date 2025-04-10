@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .tabs-container {
+    display: flex;
+    gap: 20px;
+
+    .tab {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+
+      padding: 8px 10px;
+
+      border-radius: 20px;
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: #90a7c872;
+      }
+    }
+
+    .active {
+      background-color: #90a7c8;
+      &:hover {
+        background-color: #90a7c8;
+      }
+    }
+  }
+  .dropdown {
+    height: 200px;
+  }
+}

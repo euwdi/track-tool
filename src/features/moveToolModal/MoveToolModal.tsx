@@ -5,6 +5,7 @@ import { useToolsStore } from "@/stores/toolsStore";
 import Dropdown from "@/common/DropDown/Dropdown";
 import { useStoragesStore } from "@/stores/storagesStore";
 import { useUsersStore } from "@/stores/usersStore";
+import { PickStorageIdComponent } from "@/common/PickStorageIdComponent/PickStorageIdComponent";
 
 type Props = {
   onCloseModal: () => void;
@@ -22,30 +23,9 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
     }
   };
   const [toStorageId, setToStorageId] = useState("67a3178a49f85d137a6bb738");
-
-  useEffect(() => {
-    getStorages();
-    getUsers();
-    // options = [
-    //   ...storages.map((storage) => {
-    //     return { label: storage.name, value: storage.id };
-    //   }),
-    // ];
-  }, []);
-
   return (
     <div className={classes.container}>
-      <Dropdown
-        options={users.map((user) => {
-          return {
-            label: user.lastName + " " + user.firstName + " " + user.middleName,
-            value: user.id,
-          };
-        })}
-        onSelect={(roleId) => {
-          setToStorageId(roleId);
-        }}
-      />
+      <PickStorageIdComponent onChange={setToStorageId} />
 
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal}>

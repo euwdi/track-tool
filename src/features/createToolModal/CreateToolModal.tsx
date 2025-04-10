@@ -4,6 +4,7 @@ import { Button } from "@/common/Button/Button";
 import { Input } from "@/common/Input/Input";
 import { Table } from "@/common/Table/Table";
 import { useToolsStore } from "@/stores/toolsStore";
+import { PickStorageIdComponent } from "@/common/PickStorageIdComponent/PickStorageIdComponent";
 
 type Props = {
   onCloseModal: () => void;
@@ -13,26 +14,11 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
   const { createTool } = useToolsStore();
   const onClickCreateTool = () => {
     createTool({ name, typeId: type, storageId });
-    // onCloseModal();
+    onCloseModal();
   };
   const [name, setName] = useState("");
   const [type, setType] = useState("653f8e1b1c9d440000a1b2d0");
-  const [storageId, setStorageId] = useState("67a3178a49f85d137a6bb738");
-
-  // const [filterText, setFilterText] = useState("");
-
-  // useEffect(() => {
-  //   getMyTools();
-  // }, []);
-
-  // const tableData = useMemo(() => {
-  //   return myTools
-  //     .filter((tool) =>
-  //       tool.name.toLowerCase().includes(filterText.toLowerCase())
-  //     )
-  //     .map((tool) => [tool.name, tool.description]);
-  // }, [filterText, myTools]);
-  // const canAddTools = false;
+  const [storageId, setStorageId] = useState("");
 
   return (
     <div className={classes.container}>
@@ -52,6 +38,8 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
           setType(e.target.value);
         }}
       />
+
+      <PickStorageIdComponent onChange={setStorageId} />
 
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal}>

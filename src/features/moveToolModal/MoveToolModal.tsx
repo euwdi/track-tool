@@ -4,6 +4,7 @@ import { Button } from "@/common/Button/Button";
 import { useToolsStore } from "@/stores/toolsStore";
 import Dropdown from "@/common/DropDown/Dropdown";
 import { useStoragesStore } from "@/stores/storagesStore";
+import { useUsersStore } from "@/stores/usersStore";
 
 type Props = {
   onCloseModal: () => void;
@@ -12,6 +13,8 @@ type Props = {
 const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
   const { moveToolId, moveTool } = useToolsStore();
   const { storages, getStorages } = useStoragesStore();
+  const { users, getUsers } = useUsersStore();
+  
   const onClickCreateTool = () => {
     if (moveToolId) moveTool({ toolId: moveToolId, toStorageId });
     // onCloseModal();
@@ -20,13 +23,22 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
 
   useEffect(() => {
     getStorages();
+    getUsers();
+    // options = [
+    //   ...storages.map((storage) => {
+    //     return { label: storage.name, value: storage.id };
+    //   }),
+    // ];
   }, []);
 
   return (
     <div className={classes.container}>
       <Dropdown
-        options={storages.map((storage) => {
-          return { label: storage.name, value: storage.id };
+        options={users.map((user) => {
+          return {
+            label: user.lastName + " " + user.firstName + " " + user.middleName,
+            value: user.id,
+          };
         })}
         onSelect={(roleId) => {
           setToStorageId(roleId);

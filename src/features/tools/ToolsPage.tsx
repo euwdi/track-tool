@@ -25,13 +25,13 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         tool.name.toLowerCase().includes(filterText.toLowerCase())
       )
       .map((tool) => ({
-        fields: [tool.name, tool.description, statusMapping[tool.status]],
+        fields: [tool.name, tool.description, statusMapping[tool.status], tool.storage.name],
         onClickMove: () => {
           setMoveToolId(tool.id);
           setMoveModalIsOpen(true);
         },
       }));
-  }, [filterText, tools]);
+  }, [filterText, setMoveToolId, tools]);
   const canAddTools = false;
 
   const onClickAddTool = () => {};
@@ -63,7 +63,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       </div>
 
       <Table
-        headers={["Наименование", "Описание", "Статус"]}
+        headers={["Наименование", "Описание", "Статус", "Местоположение"]}
         data={
           tableData
           //   [

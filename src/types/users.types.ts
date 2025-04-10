@@ -1,3 +1,5 @@
+import { Storage } from "./storages.types";
+
 export type User = {
   id: string;
   cancelDate: Date | null;
@@ -11,6 +13,8 @@ export type User = {
   startDate: Date;
   roleName: string;
   title: string;
+
+  storages: Storage[]
 };
 
 export type CreateUser = {

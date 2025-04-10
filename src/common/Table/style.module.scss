@@ -14,6 +14,13 @@ $table-border-thin: 2px solid $table-primary-color;
   border-spacing: 0;
   border: none;
 
+  .clickable-row {
+    cursor: pointer;
+    &:hover {
+      transform: rotate(1deg);
+    }
+  }
+
   tr {
     td,
     th {

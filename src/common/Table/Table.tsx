@@ -5,13 +5,15 @@ import { Button } from "../Button/Button";
 
 type TProps = {
   headers: string[];
-  data: { fields: string[][]; onClickMove?: () => void }[];
+  data: {
+    fields: string[][];
+    onClickMove?: () => void;
+    onClick?: () => void;
+  }[];
   isEditable?: boolean;
-  isOpenable?: boolean;
-  isMoveble?: boolean;
 };
 
-const Table: FC<TProps> = ({ headers, data, isMoveble }) => {
+const Table: FC<TProps> = ({ headers, data }) => {
   return (
     <table className={classes.table}>
       <tbody>
@@ -19,11 +21,13 @@ const Table: FC<TProps> = ({ headers, data, isMoveble }) => {
           {headers.map((header) => (
             <th className={classes.tableHeaderCell}>{header}</th>
           ))}
-          {isMoveble && <th className={classes.tableHeaderCell}></th>}
         </tr>
 
         {data.map((trData, index) => (
-          <tr>
+          <tr
+            onClick={trData.onClick}
+            className={trData.onClick && classes.clickableRow}
+          >
             {trData.fields.map((tdData) => (
               <td
                 className={`${classes.tableCell} ${
@@ -33,17 +37,6 @@ const Table: FC<TProps> = ({ headers, data, isMoveble }) => {
                 {tdData}
               </td>
             ))}
-            {isMoveble && trData.onClickMove && (
-              <td
-                className={`${classes.tableCell} ${
-                  index % 2 === 1 ? classes.gray : classes.white
-                }`}
-              >
-                <Button onClick={trData.onClickMove}>
-                  <ArrowIcon />
-                </Button>
-              </td>
-            )}
           </tr>
         ))}
       </tbody>

@@ -1,0 +1,68 @@
+import { FC } from "react";
+import classes from "./style.module.scss";
+import { Button } from "@/common/Button/Button";
+import { useToolsStore } from "@/stores/toolsStore";
+import { useUserStore } from "@/stores/userStore";
+import { Loader } from "@/common/Loader/Loader";
+
+type Props = {
+  onCloseModal: () => void;
+  onMoveTool: () => void;
+};
+
+const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
+  const { currentTool, setMoveToolId, moveTool } = useToolsStore();
+  const { profile } = useUserStore();
+
+  const onClickTakeTool = () => {
+    if (currentTool)
+      moveTool({
+        toolId: currentTool?.id,
+        toStorageId: profile.storages[0].id,
+      });
+    onCloseModal();
+  };
+
+  const onClickMoveTool = () => {
+    setMoveToolId(currentTool?.id);
+    onMoveTool();
+  };
+
+  if (!currentTool) {
+    return <Loader />;
+  }
+
+  return (
+    <div className={classes.container}>
+      <div className={classes.specsContainer}>
+        <div className={classes.title}> {currentTool.name}</div>
+
+        <div className={classes.spec}>
+          <div className={classes.specTitle}>Описание </div>
+          <div className={classes.specDescr}>{currentTool.description} </div>
+        </div>
+
+        <div className={classes.spec}>
+          <div className={classes.specTitle}>Статус </div>
+          <div className={classes.specDescr}>{currentTool.status} </div>
+        </div>
+
+        <div className={classes.spec}>
+          <div className={classes.specTitle}>Местонахождение </div>
+          <div className={classes.specDescr}>{currentTool.storage.name} </div>
+        </div>
+      </div>
+
+      <div className={classes.row}>
+        <Button fullWidth onClick={onClickTakeTool}>
+          Взять
+        </Button>
+        <Button fullWidth onClick={onClickMoveTool}>
+          Передать
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export { ToolModal };

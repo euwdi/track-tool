@@ -2,17 +2,22 @@
 
 .dropdown {
     position: relative;
-    width: 200px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0%;
   
     button {
       width: 100%;
-      padding: 8px;
+      padding: 8px 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background-color: #fff;
       cursor: pointer;
       text-align: left;
       font-size: 14px;
+
+      white-space: nowrap;
   
       &:hover {
         background-color: #f9f9f9;
@@ -20,6 +25,9 @@
     }
   
     ul {
+      overflow: auto;
+      max-height: 200px;
+
       position: absolute;
       top: 100%;
       left: 0;
@@ -34,7 +42,7 @@
       margin: 0;
   
       li {
-        padding: 8px;
+        padding: 8px 20px;
         cursor: pointer;
         font-size: 14px;
   

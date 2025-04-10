@@ -14,10 +14,12 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
   const { moveToolId, moveTool } = useToolsStore();
   const { storages, getStorages } = useStoragesStore();
   const { users, getUsers } = useUsersStore();
-  
+
   const onClickCreateTool = () => {
-    if (moveToolId) moveTool({ toolId: moveToolId, toStorageId });
-    // onCloseModal();
+    if (moveToolId) {
+      moveTool({ toolId: moveToolId, toStorageId });
+      onCloseModal();
+    }
   };
   const [toStorageId, setToStorageId] = useState("67a3178a49f85d137a6bb738");
 

@@ -15,10 +15,14 @@
     flex-direction: row;
     gap: 20px;
     justify-content: space-between;
+
+    button {
+      width: 100px;
+    }
   }
 
-  button {
-    width: 100px;
+  .dropdown {
+    width: 300px;
   }
 
   .top-container {

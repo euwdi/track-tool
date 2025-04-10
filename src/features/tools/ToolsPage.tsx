@@ -6,13 +6,17 @@ import { Table } from "@/common/Table/Table";
 import { useToolsStore } from "@/stores/toolsStore";
 import { Modal } from "@/common/Modal/Modal";
 import { CreateToolModal } from "../createToolModal/CreateToolModal";
-import { statusMapping } from "./types";
+import { ToolStatusEnum, statusMapping } from "./types";
+import { ToolModal } from "../toolModal/toolModal";
 import { MoveToolModal } from "../moveToolModal/MoveToolModal";
+import Dropdown from "@/common/DropDown/Dropdown";
 
 const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
-  const { getTools, tools, setMoveToolId } = useToolsStore();
+  const { getTools, tools, setMoveToolId, setCurrentTool } = useToolsStore();
   const [filterText, setFilterText] = useState("");
+  const [status, setStatus] = useState("all");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [toolModalIsOpen, setToolModalIsOpen] = useState(false);
   const [moveModalIsOpen, setMoveModalIsOpen] = useState(false);
 
   useEffect(() => {
@@ -20,18 +24,29 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   }, []);
 
   const tableData = useMemo(() => {
+    console.log(tools);
+    
     return tools
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())
       )
+      .filter((tool) => {
+        if (status === ToolStatusEnum.ALL) return true;
+        else return tool.status === status;
+      })
       .map((tool) => ({
-        fields: [tool.name, tool.description, statusMapping[tool.status], tool.storage.name],
-        onClickMove: () => {
-          setMoveToolId(tool.id);
-          setMoveModalIsOpen(true);
+        fields: [
+          tool.name,
+          tool.description,
+          statusMapping[tool.status],
+          tool.storage.name,
+        ],
+        onClick: () => {
+          setCurrentTool(tool);
+          setToolModalIsOpen(true);
         },
       }));
-  }, [filterText, setMoveToolId, tools]);
+  }, [filterText, setMoveToolId, tools, status]);
   const canAddTools = false;
 
   const onClickAddTool = () => {};
@@ -62,6 +77,18 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         </Button>
       </div>
 
+      <div className={classes.dropdown}>
+        <Dropdown
+          options={Object.values(ToolStatusEnum).map((statusName) => ({
+            label: statusMapping[statusName],
+            value: statusName,
+          }))}
+          onSelect={(statusName) => {
+            setStatus(statusName);
+          }}
+        />
+      </div>
+
       <Table
         headers={["Наименование", "Описание", "Статус", "Местоположение"]}
         data={
@@ -71,7 +98,6 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
           // ]
         }
-        isMoveble
       />
 
       <Modal
@@ -96,6 +122,23 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         <MoveToolModal
           onCloseModal={() => {
             setMoveModalIsOpen(false);
+          }}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={toolModalIsOpen}
+        onClose={() => {
+          setToolModalIsOpen(false);
+        }}
+      >
+        <ToolModal
+          onMoveTool={() => {
+            setMoveModalIsOpen(true);
+            setToolModalIsOpen(false);
+          }}
+          onCloseModal={() => {
+            setToolModalIsOpen(false);
           }}
         />
       </Modal>

@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/Button/Button";
-import { Input } from "@/common/Input/Input";
+import { Button } from "@/common/components/Button/Button";
+import { Input } from "@/common/components/Input/Input";
 import { NavLink, useNavigate } from "react-router";
 import Logo from "@/assets/logo.svg?react";
 import { Routes } from "@/router/router";

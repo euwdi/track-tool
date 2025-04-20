@@ -1,15 +1,15 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/Button/Button";
-import { Input } from "@/common/Input/Input";
+import { Button } from "@/common/components/Button/Button";
+import { Input } from "@/common/components/Input/Input";
 import { Table } from "@/common/Table/Table";
 import { useToolsStore } from "@/stores/toolsStore";
-import { Modal } from "@/common/Modal/Modal";
-import { CreateToolModal } from "../createToolModal/CreateToolModal";
+import { Modal } from "@/common/components/Modal/Modal";
+import { CreateToolModal } from "./createToolModal/CreateToolModal";
 import { ToolStatusEnum, statusMapping } from "./types";
-import { ToolModal } from "../toolModal/toolModal";
-import { MoveToolModal } from "../moveToolModal/MoveToolModal";
-import Dropdown from "@/common/DropDown/Dropdown";
+import { ToolModal } from "./toolModal/toolModal";
+import { MoveToolModal } from "../../common/moveToolModal/MoveToolModal";
+import Dropdown from "@/common/components/DropDown/Dropdown";
 import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";
 
 const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {

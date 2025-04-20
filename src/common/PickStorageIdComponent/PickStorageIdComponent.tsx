@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import classes from "./style.module.scss";
-import Dropdown from "../DropDown/Dropdown";
+import Dropdown from "../components/DropDown/Dropdown";
 import { useStoragesStore } from "@/stores/storagesStore";
 import { useUsersStore } from "@/stores/usersStore";
 

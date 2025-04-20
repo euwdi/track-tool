@@ -1,5 +1,5 @@
 // Определяем типы статусов
-type ToolStatus = "available" | "busy" | "canceled" | "all";
+export type ToolStatus = "available" | "busy" | "canceled" | "all";
 
 // Создаем маппинг статусов на человекочитаемые значения
 export const statusMapping: Record<ToolStatus, string> = {

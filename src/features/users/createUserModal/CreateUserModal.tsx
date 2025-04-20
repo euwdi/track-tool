@@ -1,11 +1,11 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/Button/Button";
-import { Input } from "@/common/Input/Input";
+import { Button } from "@/common/components/Button/Button";
+import { Input } from "@/common/components/Input/Input";
 import { useUsersStore } from "@/stores/usersStore";
 import { useRolesStore } from "@/stores/rolesStore";
-import Dropdown from "@/common/DropDown/Dropdown";
-import Calendar from "@/common/Calendar/Calendar";
+import Dropdown from "@/common/components/DropDown/Dropdown";
+import Calendar from "@/common/components/Calendar/Calendar";
 
 type Props = {
   onCloseModal: () => void;

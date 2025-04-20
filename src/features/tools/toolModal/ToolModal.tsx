@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/Button/Button";
+import { Button } from "@/common/components/Button/Button";
 import { useToolsStore } from "@/stores/toolsStore";
 import { useUserStore } from "@/stores/userStore";
 import { Loader } from "@/common/Loader/Loader";

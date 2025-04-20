@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/Button/Button";
+import { Button } from "@/common/components/Button/Button";
 import { useToolsStore } from "@/stores/toolsStore";
-import Dropdown from "@/common/DropDown/Dropdown";
+import Dropdown from "@/common/components/DropDown/Dropdown";
 import { useStoragesStore } from "@/stores/storagesStore";
 import { useUsersStore } from "@/stores/usersStore";
 import { PickStorageIdComponent } from "@/common/PickStorageIdComponent/PickStorageIdComponent";

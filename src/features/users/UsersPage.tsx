@@ -1,11 +1,11 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/Button/Button";
-import { Input } from "@/common/Input/Input";
+import { Button } from "@/common/components/Button/Button";
+import { Input } from "@/common/components/Input/Input";
 import { Table } from "@/common/Table/Table";
-import { Modal } from "@/common/Modal/Modal";
+import { Modal } from "@/common/components/Modal/Modal";
 import { useUsersStore } from "@/stores/usersStore";
-import { CreateUserModal } from "../createUserModal/CreateUserModal";
+import { CreateUserModal } from "./createUserModal/CreateUserModal";
 
 const UsersPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   const { getUsers, users } = useUsersStore();

@@ -1,10 +1,10 @@
-import { StatusesTitles } from "@/features/tools/types";
+import { ToolStatus } from "@/features/tools/types";
 import { Storage } from "./storages.types";
+
 export type Tool = {
-  tool: any;
   id: string;
   description: string;
-  status: StatusesTitles;
+  status: ToolStatus;
   name: string;
   registerDate: string;
   startDate: string;

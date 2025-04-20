@@ -5,7 +5,7 @@ import Logo from "@/assets/logo.svg?react";
 import BurgerMenu from "@/assets/burgerMenu.svg?react";
 import ProfileIcon from "@/assets/profile.svg?react";
 import NotificationsIcon from "@/assets/notification.svg?react";
-import { Menu } from "@/common/Menu/Menu";
+import { Menu } from "@/common/components/Menu/Menu";
 
 const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   return (

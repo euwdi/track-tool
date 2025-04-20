@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./style.module.scss";
 
 interface Option {
@@ -23,9 +23,18 @@ const Dropdown: React.FC<DropdownProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false); // Открыт/закрыт выпадающий список
   const [selectedOption, setSelectedOption] = useState<string | null>(null); // Выбранная опция
 
+
+  const dropdownRef = useRef(null);
+  
   // Обработчик открытия/закрытия выпадающего списка
   const toggleDropdown = (): void => {
     setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
   };
 
   // Обработчик выбора опции
@@ -35,10 +44,17 @@ const Dropdown: React.FC<DropdownProps> = ({
     if (onSelect) onSelect(option.value); // Вызываем callback, если он передан
   };
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const lplaceholder = placeholder || "Выберите опцию";
 
   return (
-    <div className={styles.dropdown}>
+    <div className={styles.dropdown} ref={dropdownRef}>
       {/* Кнопка для открытия/закрытия */}
       <button onClick={toggleDropdown}>
         {selectedOption || lplaceholder}

@@ -1,13 +1,19 @@
 import { FC, useEffect, useMemo, useState } from "react";
 import classes from "./style.module.scss";
-import { Button } from "@/common/components/Button/Button";
 import { Input } from "@/common/components/Input/Input";
 import { Table } from "@/common/Table/Table";
 import { useToolsStore } from "@/stores/toolsStore";
+import { Modal } from "@/common/components/Modal/Modal";
+import { ToolModal } from "../tools/toolModal/toolModal";
+import { MoveToolModal } from "@/common/moveToolModal/MoveToolModal";
 
 const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
-  const { getMyTools, myTools } = useToolsStore();
+  const { getMyTools, myTools, setCurrentTool } = useToolsStore();
+
   const [filterText, setFilterText] = useState("");
+
+  const [toolModalIsOpen, setToolModalIsOpen] = useState(false);
+  const [moveModalIsOpen, setMoveModalIsOpen] = useState(false);
 
   useEffect(() => {
     getMyTools();
@@ -18,16 +24,19 @@ const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())
       )
-      .map((tool) => ({ fields: [tool.name, tool.description] }));
+      .map((tool) => ({
+        fields: [tool.name, tool.description],
+        onClick: () => {
+          setCurrentTool(tool);
+          setToolModalIsOpen(true);
+        },
+      }));
   }, [filterText, myTools]);
-  const canAddTools = false;
 
   return (
     <div className={classes.container}>
-      <div className={classes.topContainer}>
-        Моё оборудование
-        {canAddTools && <Button onClick={() => {}} />}
-      </div>
+      <div className={classes.topContainer}>Моё оборудование</div>
+
       <Input
         placeholder="Поиск по наименованию"
         inputType="outline"
@@ -47,6 +56,36 @@ const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           // ]
         }
       />
+
+      <Modal
+        isOpen={toolModalIsOpen}
+        onClose={() => {
+          setToolModalIsOpen(false);
+        }}
+      >
+        <ToolModal
+          onMoveTool={() => {
+            setMoveModalIsOpen(true);
+            setToolModalIsOpen(false);
+          }}
+          onCloseModal={() => {
+            setToolModalIsOpen(false);
+          }}
+        />
+      </Modal>
+
+      <Modal
+        isOpen={moveModalIsOpen}
+        onClose={() => {
+          setMoveModalIsOpen(false);
+        }}
+      >
+        <MoveToolModal
+          onCloseModal={() => {
+            setMoveModalIsOpen(false);
+          }}
+        />
+      </Modal>
     </div>
   );
 };

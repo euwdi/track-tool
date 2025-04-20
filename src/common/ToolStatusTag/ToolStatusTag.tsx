@@ -1,9 +1,9 @@
 import { FC } from "react";
 import classes from "./style.module.scss";
-import { ToolStatusEnum, statusMapping } from "@/features/tools/types";
+import { ToolStatus, statusMapping } from "@/features/tools/types";
 
 type TProps = {
-  status: ToolStatusEnum;
+  status: ToolStatus;
 };
 
 const StatusTag: FC<TProps> = ({ status }) => {

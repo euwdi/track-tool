@@ -10,9 +10,10 @@ import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";
 type Props = {
   onCloseModal: () => void;
   onMoveTool: () => void;
+  canTakeTools?: boolean;
 };
 
-const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
+const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
   const { currentTool, setMoveToolId, moveTool } = useToolsStore();
   const { transfers, getTransfersByTool } = useTransfersStore();
   const { profile } = useUserStore();
@@ -32,8 +33,11 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
   };
 
   useEffect(() => {
+    console.log(currentTool);
     if (currentTool) getTransfersByTool(currentTool.id, 5);
   }, [currentTool, getTransfersByTool]);
+
+  console.log(currentTool);
 
   if (!currentTool) {
     return <Loader />;
@@ -56,10 +60,12 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
           </div>
         </div>
 
-        <div className={classes.spec}>
-          <div className={classes.specTitle}>Местонахождение </div>
-          <div className={classes.specDescr}>{currentTool.storage.name} </div>
-        </div>
+        {canTakeTools && (
+          <div className={classes.spec}>
+            <div className={classes.specTitle}>Местонахождение </div>
+            <div className={classes.specDescr}>{currentTool.storage.name} </div>
+          </div>
+        )}
       </div>
 
       {transfers.length > 0 && (
@@ -85,9 +91,11 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
       )}
 
       <div className={classes.row}>
-        <Button fullWidth onClick={onClickTakeTool}>
-          Взять
-        </Button>
+        {canTakeTools && (
+          <Button fullWidth onClick={onClickTakeTool}>
+            Взять
+          </Button>
+        )}
         <Button fullWidth onClick={onClickMoveTool}>
           Передать
         </Button>

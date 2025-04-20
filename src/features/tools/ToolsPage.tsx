@@ -142,6 +142,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           onCloseModal={() => {
             setToolModalIsOpen(false);
           }}
+          canTakeTools
         />
       </Modal>
     </div>

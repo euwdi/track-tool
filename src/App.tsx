@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import { tokenService } from "./network/tokenService";
 import { useUserStore } from "./stores/userStore";
 import { Loader } from "./common/Loader/Loader";
+import { useRolesStore } from "./stores/rolesStore";
 
 function App() {
   const [profileLoaded, setProfileLoaded] = useState<boolean>();
-  const [loadComplete, setLoadComplete] = useState<boolean>();
   const { isAuth, getProfile } = useUserStore();
+  const { uniqueRole } = useRolesStore();
 
   useEffect(() => {
     const isToken = tokenService.isAccessToken();
@@ -30,7 +31,7 @@ function App() {
     }
   }, [isAuth]);
 
-  if (loadComplete)
+  if (uniqueRole === 1)
     return (
       <div
         style={{
@@ -40,7 +41,21 @@ function App() {
           justifyContent: "center",
         }}
       >
-        <Loader text />
+        <Loader text={1} />
+      </div>
+    );
+
+  if (uniqueRole === 2)
+    return (
+      <div
+        style={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Loader text={2} />
       </div>
     );
 
@@ -59,13 +74,7 @@ function App() {
     );
 
   return (
-    <div
-        onKeyDown={() => {
-          if (event.key === "Delete") {
-            setLoadComplete(!loadComplete);
-          }
-        }}
-    >
+    <div>
       <RouterProvider router={mainRouter} />
     </div>
   );

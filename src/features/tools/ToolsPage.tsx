@@ -25,8 +25,6 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   }, []);
 
   const tableData = useMemo(() => {
-    console.log(tools);
-
     return tools
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())

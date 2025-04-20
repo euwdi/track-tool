@@ -5,6 +5,8 @@ import { create } from "zustand";
 interface RolesState {
   roles: Role[];
   getRoles: () => void;
+  uniqueRole: number;
+  setUniqueRole: (num: number) => void;
 }
 
 const useRolesStore = create<RolesState>()((set) => ({
@@ -16,6 +18,11 @@ const useRolesStore = create<RolesState>()((set) => ({
     } catch (err) {
       console.error("get roles failed", err);
     }
+  },
+
+  uniqueRole: 0,
+  setUniqueRole: (num: number) => {
+    set(() => ({ uniqueRole: num }));
   },
 }));
 

@@ -1,7 +1,13 @@
 import { FC } from "react";
 import classes from "./style.module.scss";
 
-const Loader: FC<{ text?: boolean }> = ({ text }) => {
+const Loader: FC<{ text?: number }> = ({ text }) => {
+  console.log(text);
+
+  if (text === 2) {
+    return <span className={classes.alt}></span>;
+  }
+
   return (
     <div className={!text ? classes.loader : classes.loaderText}>
       <div className={classes.item}></div>

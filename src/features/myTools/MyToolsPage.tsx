@@ -37,25 +37,30 @@ const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
     <div className={classes.container}>
       <div className={classes.topContainer}>Моё оборудование</div>
 
-      <Input
-        placeholder="Поиск по наименованию"
-        inputType="outline"
-        value={filterText}
-        onChange={(e) => {
-          setFilterText(e.target.value);
-        }}
-      />
-
-      <Table
-        headers={["Наименование", "Описание"]}
-        data={
-          tableData
-          //   [
-          //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
-          //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
-          // ]
-        }
-      />
+      {myTools.length > 0 ? (
+        <>
+          <Input
+            placeholder="Поиск по наименованию"
+            inputType="outline"
+            value={filterText}
+            onChange={(e) => {
+              setFilterText(e.target.value);
+            }}
+          />
+          <Table
+            headers={["Наименование", "Описание"]}
+            data={
+              tableData
+              //   [
+              //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
+              //   ["Наименование", "Марка", "Состояние", "Категория", "Инв. №"],
+              // ]
+            }
+          />
+        </>
+      ) : (
+        <>У вас пока нет оборудования в пользовании(</>
+      )}
 
       <Modal
         isOpen={toolModalIsOpen}

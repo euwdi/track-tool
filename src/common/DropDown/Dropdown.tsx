@@ -11,9 +11,14 @@ interface Option {
 interface DropdownProps {
   options: Option[]; // Массив строк для опций
   onSelect?: (option: string) => void; // Callback-функция при выборе опции
+  placeholder?: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  options,
+  onSelect,
+  placeholder,
+}) => {
   // Состояния
   const [isOpen, setIsOpen] = useState<boolean>(false); // Открыт/закрыт выпадающий список
   const [selectedOption, setSelectedOption] = useState<string | null>(null); // Выбранная опция
@@ -30,11 +35,13 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
     if (onSelect) onSelect(option.value); // Вызываем callback, если он передан
   };
 
+  const lplaceholder = placeholder || "Выберите опцию";
+
   return (
     <div className={styles.dropdown}>
       {/* Кнопка для открытия/закрытия */}
       <button onClick={toggleDropdown}>
-        {selectedOption || "Выберите опцию"}
+        {selectedOption || lplaceholder}
       </button>
 
       {/* Список опций */}

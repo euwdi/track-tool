@@ -1,0 +1,16 @@
+@use "@/styles/colors.scss" as *;
+
+.container {
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+
+.available {
+  background-color: $status-available-color;
+}
+.busy {
+  background-color: $status-busy-color;
+}
+.canceled {
+  background-color: $status-canceled-color;
+}

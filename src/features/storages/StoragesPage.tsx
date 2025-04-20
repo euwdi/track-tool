@@ -40,12 +40,13 @@ const StoragesPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           }}
         />
         <Button
-          text="Добавить"
           fullWidth
           onClick={() => {
             setModalIsOpen(true);
           }}
-        />
+        >
+          Добавить
+        </Button>
       </div>
 
       <Table

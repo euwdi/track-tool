@@ -1,6 +1,8 @@
 .container {
   min-width: 500px;
   min-height: 500px;
+  max-height: 80vh;
+  overflow: auto;
 
   padding: 10px;
 
@@ -39,12 +41,18 @@
   }
 
   .transfers-container {
+    font-size: 26px;
+    font-weight: 500;
+
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
 
     .transfer {
+      font-size: 16px;
+      font-weight: 500;
+
       display: flex;
       gap: 20px;
 

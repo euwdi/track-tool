@@ -5,6 +5,7 @@ import { useToolsStore } from "@/stores/toolsStore";
 import { useUserStore } from "@/stores/userStore";
 import { Loader } from "@/common/Loader/Loader";
 import { useTransfersStore } from "@/stores/transfersStore";
+import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";
 
 type Props = {
   onCloseModal: () => void;
@@ -38,20 +39,6 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
     return <Loader />;
   }
 
-  const transfersData = transfers.map((transfer) => {
-    console.log(typeof transfer.date);
-    return (
-      <div className={classes.transfer}>
-        <div className={classes.transferDate}>
-          {new Date(transfer.date).toDateString()}
-        </div>
-        <div className={classes.transferTo}>
-          {transfer.fromStorage.name} - {transfer.toStorage.name}
-        </div>
-      </div>
-    );
-  });
-
   return (
     <div className={classes.container}>
       <div className={classes.specsContainer}>
@@ -64,7 +51,9 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
 
         <div className={classes.spec}>
           <div className={classes.specTitle}>Статус </div>
-          <div className={classes.specDescr}>{currentTool.status} </div>
+          <div className={classes.specDescr}>
+            <StatusTag status={currentTool.status} />
+          </div>
         </div>
 
         <div className={classes.spec}>
@@ -72,7 +61,28 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool }) => {
           <div className={classes.specDescr}>{currentTool.storage.name} </div>
         </div>
       </div>
-      <div className={classes.transfersContainer}>{transfersData}</div>
+
+      {transfers.length > 0 && (
+        <div className={classes.transfersContainer}>
+          История перемещений
+          {transfers.map((transfer) => (
+            <div className={classes.transfer}>
+              <div className={classes.transferTo}>
+                {transfer.toStorage.name}
+              </div>
+              <div className={classes.transferDate}>
+                {new Date(transfer.date).toLocaleDateString("ru", {
+                  day: "numeric",
+                  month: "numeric",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className={classes.row}>
         <Button fullWidth onClick={onClickTakeTool}>

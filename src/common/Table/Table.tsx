@@ -1,7 +1,5 @@
 import { FC } from "react";
 import classes from "./style.module.scss";
-import ArrowIcon from "@/assets/arrow.svg?react";
-import { Button } from "../Button/Button";
 
 type TProps = {
   headers: string[];

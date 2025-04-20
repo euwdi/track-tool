@@ -10,6 +10,7 @@ import { ToolStatusEnum, statusMapping } from "./types";
 import { ToolModal } from "../toolModal/toolModal";
 import { MoveToolModal } from "../moveToolModal/MoveToolModal";
 import Dropdown from "@/common/DropDown/Dropdown";
+import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";
 
 const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   const { getTools, tools, setMoveToolId, setCurrentTool } = useToolsStore();
@@ -25,7 +26,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
 
   const tableData = useMemo(() => {
     console.log(tools);
-    
+
     return tools
       .filter((tool) =>
         tool.name.toLowerCase().includes(filterText.toLowerCase())
@@ -38,7 +39,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         fields: [
           tool.name,
           tool.description,
-          statusMapping[tool.status],
+          <StatusTag status={tool.status} />,
           tool.storage.name,
         ],
         onClick: () => {
@@ -86,6 +87,7 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           onSelect={(statusName) => {
             setStatus(statusName);
           }}
+          placeholder="Фильтр по статусу"
         />
       </div>
 

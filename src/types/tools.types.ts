@@ -15,4 +15,5 @@ export type Tool = {
     id: string;
     description: string;
   };
+  photos: string[]
 };

@@ -6,6 +6,7 @@ import { useUserStore } from "@/stores/userStore";
 import { Loader } from "@/common/Loader/Loader";
 import { useTransfersStore } from "@/stores/transfersStore";
 import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";
+import ImageGallery from "@/common/ImageGallery/ImageGallery";
 
 type Props = {
   onCloseModal: () => void;
@@ -67,6 +68,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
           </div>
         )}
       </div>
+      <ImageGallery images={currentTool.photos}></ImageGallery>
 
       {transfers.length > 0 && (
         <div className={classes.transfersContainer}>

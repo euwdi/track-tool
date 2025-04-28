@@ -1,0 +1,22 @@
+.gallery {
+  .preview-container {
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .full-container {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    img {
+      object-fit: cover;
+    }
+  }
+}

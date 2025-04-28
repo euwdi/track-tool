@@ -4,7 +4,7 @@ import { Layout } from "@/common/layout/Layout";
 import { ToolsPage } from "@/features/tools/ToolsPage";
 import { PublicRouteGuard } from "./PublicRouteGuard";
 import { RouteGuard } from "./RouteGuard";
-import { MyToolsPage } from "@/features/myTools/MyToolsPage";
+import { MyToolsPage } from "@/features/tools/myTools/MyToolsPage";
 import { StoragesPage } from "@/features/storages/StoragesPage";
 import { UsersPage } from "@/features/users/UsersPage";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./style.module.scss";
-import { Modal } from "../components/Modal/Modal";
+import { ImageModal } from "../components/ImageModal/ImageModal";
 
 type Props = {
   images: string[];
@@ -19,8 +19,8 @@ const ImageGallery: React.FC<Props> = ({ images }) => {
   };
 
   return (
-    <div className={classes.gallery}>
-      <div className={classes.previewContainer}>
+    <>
+      <div className={classes.gallery}>
         {images.map((src, index) => (
           <img
             key={index} // Используем индекс как ключ
@@ -30,22 +30,17 @@ const ImageGallery: React.FC<Props> = ({ images }) => {
           />
         ))}
       </div>
-
       {selectedImage && (
-        <Modal isOpen={!!selectedImage} onClose={closeModal}>
-          <div
-            className={classes.fullContainer} // Контейнер для модального окна
-            onClick={closeModal} // Закрытие по клику на фон
-          >
-            <img
-              src={selectedImage}
-              alt="Full-size preview"
-              onClick={(e) => e.stopPropagation()} // Предотвращаем закрытие при клике на изображение
-            />
-          </div>
-        </Modal>
+        <ImageModal isOpen={!!selectedImage} onClose={closeModal}>
+          <img
+            className={classes.img}
+            src={selectedImage}
+            alt="Full-size preview"
+            onClick={(e) => e.stopPropagation()} // Предотвращаем закрытие при клике на изображение
+          />
+        </ImageModal>
       )}
-    </div>
+    </>
   );
 };
 

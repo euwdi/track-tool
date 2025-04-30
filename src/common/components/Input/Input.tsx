@@ -12,8 +12,6 @@ const Input: FC<TProps & React.InputHTMLAttributes<HTMLInputElement>> = (
   const { setUniqueRole } = useRolesStore();
 
   const onChange = (event) => {
-    console.log(event.target.value);
-    
     if (event.target.value.toLowerCase() === "сейчас или вообще?") {
       setUniqueRole(1);
     }

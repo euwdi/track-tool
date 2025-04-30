@@ -45,64 +45,74 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
   }
 
   return (
-    <div className={classes.container}>
-      <div className={classes.specsContainer}>
-        <div className={classes.title}> {currentTool.name}</div>
+    <>
+      {currentTool && (
+        <div className={classes.container}>
+          <div className={classes.specsContainer}>
+            <div className={classes.title}> {currentTool.name}</div>
 
-        <div className={classes.spec}>
-          <div className={classes.specTitle}>Описание </div>
-          <div className={classes.specDescr}>{currentTool.description} </div>
-        </div>
-
-        <div className={classes.spec}>
-          <div className={classes.specTitle}>Статус </div>
-          <div className={classes.specDescr}>
-            <StatusTag status={currentTool.status} />
-          </div>
-        </div>
-
-        {canTakeTools && (
-          <div className={classes.spec}>
-            <div className={classes.specTitle}>Местонахождение </div>
-            <div className={classes.specDescr}>{currentTool.storage.name} </div>
-          </div>
-        )}
-      </div>
-      <ImageGallery images={currentTool.photos}></ImageGallery>
-
-      {transfers.length > 0 && (
-        <div className={classes.transfersContainer}>
-          История перемещений
-          {transfers.map((transfer) => (
-            <div className={classes.transfer}>
-              <div className={classes.transferTo}>
-                {transfer.toStorage.name}
-              </div>
-              <div className={classes.transferDate}>
-                {new Date(transfer.date).toLocaleDateString("ru", {
-                  day: "numeric",
-                  month: "numeric",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+            <div className={classes.spec}>
+              <div className={classes.specTitle}>Описание </div>
+              <div className={classes.specDescr}>
+                {currentTool.description}{" "}
               </div>
             </div>
-          ))}
+
+            <div className={classes.spec}>
+              <div className={classes.specTitle}>Статус </div>
+              <div className={classes.specDescr}>
+                <StatusTag status={currentTool.status} />
+              </div>
+            </div>
+
+            {canTakeTools && (
+              <div className={classes.spec}>
+                <div className={classes.specTitle}>Местонахождение </div>
+                <div className={classes.specDescr}>
+                  {currentTool.storage.name}{" "}
+                </div>
+              </div>
+            )}
+          </div>
+          <ImageGallery
+            images={currentTool.photos}
+          />
+
+          {transfers.length > 0 && (
+            <div className={classes.transfersContainer}>
+              История перемещений
+              {transfers.map((transfer) => (
+                <div className={classes.transfer}>
+                  <div className={classes.transferTo}>
+                    {transfer.toStorage.name}
+                  </div>
+                  <div className={classes.transferDate}>
+                    {new Date(transfer.date).toLocaleDateString("ru", {
+                      day: "numeric",
+                      month: "numeric",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className={classes.row}>
+            {canTakeTools && (
+              <Button fullWidth onClick={onClickTakeTool}>
+                Взять
+              </Button>
+            )}
+            <Button fullWidth onClick={onClickMoveTool}>
+              Передать
+            </Button>
+          </div>
         </div>
       )}
-
-      <div className={classes.row}>
-        {canTakeTools && (
-          <Button fullWidth onClick={onClickTakeTool}>
-            Взять
-          </Button>
-        )}
-        <Button fullWidth onClick={onClickMoveTool}>
-          Передать
-        </Button>
-      </div>
-    </div>
+    </>
   );
 };
 

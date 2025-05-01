@@ -12,29 +12,6 @@ type Tab = {
   icon: ReactElement;
 };
 
-// [
-//   {
-//     logo: <EmpsIcon />,
-//     title: "Сотрудники",
-//     link: "/users",
-//   },
-//   {
-//     logo: <BagIcon />,
-//     title: "Мое оборудование",
-//     link: "/tools/me",
-//   },
-//   {
-//     logo: <ToolsIcon />,
-//     title: "Оборудование",
-//     link: `/tools`,
-//   },
-//   {
-//     logo: <WarehouseIcon />,
-//     title: "Склады",
-//     link: "/storages",
-//   },
-// ];
-
 const Menu: FC = () => {
   const navigator = useNavigate();
   const { logout } = useUserStore();

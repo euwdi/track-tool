@@ -7,7 +7,7 @@ import { useToolsStore } from "@/stores/toolsStore";
 import { Modal } from "@/common/components/Modal/Modal";
 import { CreateToolModal } from "./createToolModal/CreateToolModal";
 import { ToolStatusEnum, statusMapping } from "./types";
-import { ToolModal } from "./toolModal/toolModal";
+import { ToolModal } from "./toolModal/ToolModal";
 import { MoveToolModal } from "../../common/moveToolModal/MoveToolModal";
 import Dropdown from "@/common/components/DropDown/Dropdown";
 import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";

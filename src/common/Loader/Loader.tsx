@@ -2,8 +2,6 @@ import { FC } from "react";
 import classes from "./style.module.scss";
 
 const Loader: FC<{ text?: number }> = ({ text }) => {
-  console.log(text);
-
   if (text === 2) {
     return <span className={classes.alt}></span>;
   }

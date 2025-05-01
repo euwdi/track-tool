@@ -4,9 +4,8 @@ import { Button } from "@/common/components/Button/Button";
 import { Input } from "@/common/components/Input/Input";
 import { Table } from "@/common/Table/Table";
 import { Modal } from "@/common/components/Modal/Modal";
-import { CreateToolModal } from "../tools/createToolModal/CreateToolModal";
 import { useStoragesStore } from "@/stores/storagesStore";
-import { CreateStorageModal } from "./createStorageModal/createStorageModal";
+import { CreateStorageModal } from "./createStorageModal/CreateStorageModal";
 
 const StoragesPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   const { getStorages, storages } = useStoragesStore();

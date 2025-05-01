@@ -34,11 +34,8 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
   };
 
   useEffect(() => {
-    console.log(currentTool);
     if (currentTool) getTransfersByTool(currentTool.id, 5);
   }, [currentTool, getTransfersByTool]);
-
-  console.log(currentTool);
 
   if (!currentTool) {
     return <Loader />;

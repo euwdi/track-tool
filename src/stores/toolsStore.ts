@@ -13,10 +13,12 @@ interface ToolsState {
   getMyTools: () => void;
   createTool: ({
     name,
+    description,
     typeId,
     storageId,
   }: {
     name: string;
+    description: string;
     typeId: string;
     storageId: string;
   }) => void;
@@ -50,9 +52,9 @@ const useToolsStore = create<ToolsState>()((set) => ({
       console.error("get tools failed", err);
     }
   },
-  createTool: async ({ name, typeId, storageId }) => {
+  createTool: async ({ name, description, typeId, storageId }) => {
     try {
-      await toolsService.createTool({ name, typeId, storageId });
+      await toolsService.createTool({ name, description, typeId, storageId });
 
       const myTools = await toolsService.getMyTools();
       const tools = await toolsService.getTools();

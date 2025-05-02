@@ -3,7 +3,6 @@
   min-height: 500px;
   max-height: 80vh;
   max-width: 80vw;
-  overflow: auto;
 
   padding: 10px;
 
@@ -12,77 +11,76 @@
 
   gap: 16px;
 
-  .specs-container {
+  .content-container {
     flex: 1;
+
+    overflow: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 
-    .title {
-      margin-bottom: 15px;
+    gap: 16px;
 
-      font-weight: 400;
-      font-size: 32px;
-      line-height: 38px;
-      letter-spacing: 0%;
-    }
-
-    .spec {
+    .specs-container {
       display: flex;
-      gap: 20px;
+      flex-direction: column;
+      gap: 10px;
 
-      .spec-title {
-        flex: 1;
-      }
+      .spec {
+        display: flex;
+        gap: 20px;
 
-      .spec-descr {
-        flex: 1;
+        .spec-title {
+          flex: 1;
+        }
+
+        .spec-descr {
+          flex: 1;
+        }
       }
     }
-  }
-  .photo {
-    img {
-      width: 25%;
-      aspect-ratio: 1;
-      object-fit: cover;
+    .photo {
+      img {
+        width: 25%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
     }
-  }
 
-  .transfers-container {
-    font-size: 26px;
-    font-weight: 500;
-
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
-    .transfer {
-      font-size: 16px;
+    .transfers-container {
+      font-size: 26px;
       font-weight: 500;
 
       display: flex;
-      gap: 20px;
+      flex-direction: column;
+      gap: 10px;
 
-      .transfer-date {
-        flex: 1;
-      }
+      .transfer {
+        font-size: 16px;
+        font-weight: 500;
 
-      .transfer-to {
-        flex: 1;
+        display: flex;
+        gap: 20px;
+
+        .transfer-date {
+          flex: 1;
+        }
+
+        .transfer-to {
+          flex: 1;
+        }
       }
     }
   }
 
-  .top-container {
-    display: flex;
-    justify-content: space-between;
+  .title {
+    margin-bottom: 15px;
 
     font-weight: 400;
     font-size: 32px;
     line-height: 38px;
     letter-spacing: 0%;
   }
+
   .row {
     display: flex;
     gap: 20px;

@@ -8,6 +8,7 @@ import { tokenService } from "./network/tokenService";
 import { useUserStore } from "./stores/userStore";
 import { Loader } from "./common/Loader/Loader";
 import { useRolesStore } from "./stores/rolesStore";
+import { Notifications } from "./common/components/Notifications/Notification";
 
 function App() {
   const [profileLoaded, setProfileLoaded] = useState<boolean>();
@@ -75,6 +76,7 @@ function App() {
 
   return (
     <div>
+      <Notifications />
       <RouterProvider router={mainRouter} />
     </div>
   );

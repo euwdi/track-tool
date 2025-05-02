@@ -30,8 +30,9 @@ const Menu: FC = () => {
               onClick={() => navigator(item.link)}
               key={`menu-item-${item.title}`}
             >
-              {item.title}
               {item.icon && createElement(item.icon)}
+              {item.title}
+              
             </button>
             <div
               className={`${classes.bar} ${

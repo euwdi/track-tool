@@ -16,16 +16,18 @@ class ToolsService {
 
   public async createTool({
     name,
+    description,
     typeId,
     storageId,
   }: {
     name: string;
+    description: string;
     typeId: string;
     storageId: string;
   }) {
     const response = await axios.post("/api/tools", {
       name,
-      description: name,
+      description,
       typeId,
       storageId,
       startDate: new Date(),
@@ -50,7 +52,7 @@ class ToolsService {
     toStorageId: string;
   }) {
     const response = await axios.patch(`/api/tools/${toolId}`, {
-      toStorageId
+      toStorageId,
     });
 
     return response.data;

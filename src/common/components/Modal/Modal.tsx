@@ -18,9 +18,9 @@ const Modal: FC<PropsWithChildren<Props>> = ({ isOpen, onClose, children }) => {
   return (
     <div className={classes["modal-overlay"]} onClick={handleOverlayClick}>
       <div className={classes["modal"]}>
-        <button className={classes["close-button"]} onClick={onClose}>
+        {/* <button className={classes["close-button"]} onClick={onClose}>
           &times;
-        </button>
+        </button> */}
         {children}
       </div>
     </div>

@@ -2,25 +2,20 @@
   min-width: 500px;
   min-height: 500px;
 
-  padding: 40px 20px;
-
   display: flex;
   flex-direction: column;
 
   gap: 16px;
 
-  .top-container {
-    display: flex;
-    justify-content: space-between;
+  .title {
+    margin-bottom: 15px;
 
     font-weight: 400;
-    font-size: 32px;
-    line-height: 38px;
-    letter-spacing: 0%;
+    font-size: 30px;
   }
+
   .row {
     display: flex;
     gap: 20px;
-
   }
 }

@@ -28,6 +28,7 @@ const ImageGallery: React.FC<Props> = ({ images }) => {
             alt={`Image ${index + 1}`} // Генерируем alt автоматически
             onClick={() => openModal(src)}
           />
+          
         ))}
       </div>
       {selectedImage && (

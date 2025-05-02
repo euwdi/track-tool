@@ -4,7 +4,7 @@ import { Input } from "@/common/components/Input/Input";
 import { Table } from "@/common/Table/Table";
 import { useToolsStore } from "@/stores/toolsStore";
 import { Modal } from "@/common/components/Modal/Modal";
-import { ToolModal } from "../toolModal/toolModal";
+import { ToolModal } from "../toolModal/ToolModal";
 import { MoveToolModal } from "@/common/moveToolModal/MoveToolModal";
 
 const MyToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {

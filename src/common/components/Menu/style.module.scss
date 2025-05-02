@@ -7,17 +7,43 @@
 
   .menu-item {
     display: flex;
-    align-items: center;
-    gap: 5px;
+    flex-direction: column;
+    gap: 0px;
+
+    button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
 
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
+  }
 
-    cursor: pointer;
+  .bar {
+    width: 100%;
+    height: 2px;
+    transition: all 0.5s ease;
+    background-color: transparent;
+  }
 
-    &:hover {
-      opacity: 0.7;
-    }
+  // bar
+  .active {
+    background-color: #2a2f71;
+  }
+
+  // сам item
+  .active-item {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #2a2f711b;
   }
 }

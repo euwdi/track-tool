@@ -2,6 +2,7 @@
   min-width: 500px;
   min-height: 500px;
   max-height: 80vh;
+  max-width: 80vw;
   overflow: auto;
 
   padding: 10px;
@@ -39,15 +40,11 @@
       }
     }
   }
-
-  .photos-container {
-    width: 100%;
-    .photo {
-      img {
-        width: 25%;
-        aspect-ratio: 1;
-        object-fit: cover;
-      }
+  .photo {
+    img {
+      width: 25%;
+      aspect-ratio: 1;
+      object-fit: cover;
     }
   }
 

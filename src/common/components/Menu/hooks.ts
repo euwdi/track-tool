@@ -5,6 +5,7 @@ import EmpsIcon from "@/assets/emps.svg?react";
 import ToolsIcon from "@/assets/tools.svg?react";
 import WarehouseIcon from "@/assets/warehouse.svg?react";
 import { Roles } from "@/types/roles.types";
+import { useLocation } from "react-router";
 
 export const useMenuItems = () => {
   const { profile } = useUserStore();
@@ -16,7 +17,7 @@ export const useMenuItems = () => {
       icon?: React.FC<React.SVGProps<SVGSVGElement>>;
     }[] = [
       {
-        logo: BagIcon,
+        icon: BagIcon,
         title: "Мое оборудование",
         link: "/tools/me",
       },
@@ -25,7 +26,7 @@ export const useMenuItems = () => {
     if (profile.roleId === Roles.EMP) return _menu;
 
     _menu.push({
-      logo: ToolsIcon,
+      icon: ToolsIcon,
       title: "Оборудование",
       link: "/tools",
     });
@@ -33,13 +34,13 @@ export const useMenuItems = () => {
     if (profile.roleId === Roles.USER) return _menu;
 
     _menu.push({
-      logo: EmpsIcon,
+      icon: EmpsIcon,
       title: "Сотрудники",
       link: "/users",
     });
 
     _menu.push({
-      logo: WarehouseIcon,
+      icon: WarehouseIcon,
       title: "Склады",
       link: "/storages",
     });
@@ -49,3 +50,8 @@ export const useMenuItems = () => {
 
   return menu;
 };
+
+export const useRoutePath = () => {
+  const location = useLocation();
+  return location.pathname;
+}

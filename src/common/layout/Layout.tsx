@@ -1,13 +1,17 @@
 import { FC } from "react";
 import classes from "./style.module.scss";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import Logo from "@/assets/logo.svg?react";
 import BurgerMenu from "@/assets/burgerMenu.svg?react";
 import ProfileIcon from "@/assets/profile.svg?react";
-import NotificationsIcon from "@/assets/notification.svg?react";
+import { Routes } from "@/router/router";
+import { useUserStore } from "@/stores/userStore";
 import { Menu } from "@/common/components/Menu/Menu";
 
 const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
+  const navigator = useNavigate();
+  const { logout } = useUserStore();
+
   return (
     <>
       <header className={classes.header}>
@@ -17,7 +21,15 @@ const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
         <div className={classes.actionsContainer}>
           <Menu />
           <ProfileIcon className={classes.actionIcon} />
-          {/* <NotificationsIcon className={classes.actionIcon} /> */}
+          <button
+            className={classes.logoutButton}
+            onClick={() => {
+              navigator(`/${Routes.LOGIN}`);
+              logout();
+            }}
+          >
+            Выход
+          </button>
         </div>
       </header>
       <Outlet />

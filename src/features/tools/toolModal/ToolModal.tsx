@@ -100,7 +100,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
           )}
         </div>
         {currentTool.photos.length > 0 && (
-          <ImageGallery images={currentTool.photos} />
+          <ImageGallery images={currentTool.photos.map((photo) => photo.url)} />
         )}
 
         {transfers.length > 0 && (

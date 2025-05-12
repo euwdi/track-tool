@@ -15,5 +15,10 @@ export type Tool = {
     id: string;
     description: string;
   };
-  photos: string[]
+  photos: Photo[];
+};
+
+export type Photo = {
+  url: string;
+  date: string;
 };

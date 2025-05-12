@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import classes from "./style.module.scss";
 import { Button } from "@/common/components/Button/Button";
 import { useToolsStore } from "@/stores/toolsStore";
@@ -7,6 +7,8 @@ import { Loader } from "@/common/Loader/Loader";
 import { useTransfersStore } from "@/stores/transfersStore";
 import { StatusTag } from "@/common/ToolStatusTag/ToolStatusTag";
 import ImageGallery from "@/common/ImageGallery/ImageGallery";
+import { Modal } from "@/common/components/Modal/Modal";
+import { useNotifications } from "@/stores/notificationsStore";
 
 type Props = {
   onCloseModal: () => void;
@@ -15,9 +17,12 @@ type Props = {
 };
 
 const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
-  const { currentTool, setMoveToolId, moveTool } = useToolsStore();
+  const { addNotification } = useNotifications();
+  const { currentTool, deleteTool, setMoveToolId, moveTool } = useToolsStore();
   const { transfers, getTransfersByTool } = useTransfersStore();
   const { profile } = useUserStore();
+
+  const [openedDeleteModal, setOpenedDeleteModal] = useState<boolean>(false);
 
   const onClickTakeTool = () => {
     if (currentTool)
@@ -33,6 +38,32 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
     onMoveTool();
   };
 
+  const onClickDeleteTool = () => {
+    setOpenedDeleteModal(true);
+  };
+
+  const deleteToolF = () => {
+    if (currentTool) {
+      deleteTool({ toolId: currentTool.id })
+        .then(() => {
+          addNotification({
+            message: `Инструмент успешно удален`,
+            type: "success",
+            duration: 3000,
+          });
+          setOpenedDeleteModal(false);
+          onCloseModal();
+        })
+        .catch((e) => {
+          addNotification({
+            message: `Ошибка при удалении инструмента: ${e.message}`,
+            type: "error",
+            duration: 3000,
+          });
+        });
+    }
+  };
+
   useEffect(() => {
     if (currentTool) getTransfersByTool(currentTool.id, 5);
   }, [currentTool, getTransfersByTool]);
@@ -44,7 +75,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
   return (
     <div className={classes.container} tabIndex={1}>
       <div className={classes.title}> {currentTool.name}</div>
-      
+
       <div className={classes.contentContainer}>
         <div className={classes.specsContainer}>
           <div className={classes.spec}>
@@ -93,6 +124,11 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
             ))}
           </div>
         )}
+        <div className={classes.deleteContainer}>
+          <Button fullWidth onClick={onClickDeleteTool}>
+            Удалить инструмент
+          </Button>
+        </div>
       </div>
 
       <div className={classes.row}>
@@ -105,6 +141,29 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
           Передать
         </Button>
       </div>
+
+      <Modal
+        isOpen={openedDeleteModal}
+        onClose={() => {
+          setOpenedDeleteModal(false);
+        }}
+      >
+        <div className={classes.deleteModal}>
+          Вы уверены, что хотите удалить оборудование?
+          <div className={classes.row}>
+            <div className={classes.fill}>
+              <Button fullWidth onClick={() => setOpenedDeleteModal(false)}>
+                Не совсем
+              </Button>
+            </div>
+            <div className={classes.outline}>
+              <Button fullWidth onClick={deleteToolF}>
+                Абсолютно
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

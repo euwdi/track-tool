@@ -1,10 +1,7 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import classes from "./style.module.scss";
 import { Button } from "@/common/components/Button/Button";
 import { useToolsStore } from "@/stores/toolsStore";
-import Dropdown from "@/common/components/DropDown/Dropdown";
-import { useStoragesStore } from "@/stores/storagesStore";
-import { useUsersStore } from "@/stores/usersStore";
 import { PickStorageIdComponent } from "@/common/PickStorageIdComponent/PickStorageIdComponent";
 
 type Props = {
@@ -13,16 +10,16 @@ type Props = {
 
 const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
   const { moveToolId, moveTool } = useToolsStore();
-  const { storages, getStorages } = useStoragesStore();
-  const { users, getUsers } = useUsersStore();
 
   const onClickCreateTool = () => {
     if (moveToolId) {
       moveTool({ toolId: moveToolId, toStorageId });
+      console.log(moveTool);
+      
       onCloseModal();
     }
   };
-  const [toStorageId, setToStorageId] = useState("67a3178a49f85d137a6bb738");
+  const [toStorageId, setToStorageId] = useState("67a3178a49f85d137a6bb730");
   return (
     <div className={classes.container}>
       <PickStorageIdComponent onChange={setToStorageId} />

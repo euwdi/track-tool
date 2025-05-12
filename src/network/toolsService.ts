@@ -57,6 +57,12 @@ class ToolsService {
 
     return response.data;
   }
+
+  public async deleteTool({ toolId }: { toolId: string }) {
+    const response = await axios.delete(`/api/tools/${toolId}`);
+
+    return response.data;
+  }
 }
 
 const toolsService = new ToolsService();

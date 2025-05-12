@@ -29,9 +29,10 @@ interface ToolsState {
     toolId: string;
     toStorageId: string;
   }) => void;
+  deleteTool: ({ toolId }: { toolId: string }) => Promise<void>;
 }
 
-const useToolsStore = create<ToolsState>()((set) => ({
+const useToolsStore = create<ToolsState>()((set, get) => ({
   tools: [],
   myTools: [],
   currentTool: undefined,
@@ -56,9 +57,8 @@ const useToolsStore = create<ToolsState>()((set) => ({
     try {
       await toolsService.createTool({ name, description, typeId, storageId });
 
-      const myTools = await toolsService.getMyTools();
-      const tools = await toolsService.getTools();
-      set(() => ({ tools, myTools }));
+      get().getMyTools();
+      get().getTools();
     } catch (err) {
       console.error("createTool failed", err);
     }
@@ -68,11 +68,22 @@ const useToolsStore = create<ToolsState>()((set) => ({
     try {
       await toolsService.moveTool({ toolId, toStorageId });
 
-      const myTools = await toolsService.getMyTools();
-      const tools = await toolsService.getTools();
-      set(() => ({ tools, myTools }));
+      get().getMyTools();
+      get().getTools();
     } catch (err) {
       console.error("moveTool failed", err);
+      throw err;
+    }
+  },
+  deleteTool: async ({ toolId }) => {
+    try {
+      await toolsService.deleteTool({ toolId });
+
+      get().getMyTools();
+      get().getTools();
+    } catch (err) {
+      console.error("deleteTool failed", err);
+      throw err;
     }
   },
   setMoveToolId: (moveToolId) => {

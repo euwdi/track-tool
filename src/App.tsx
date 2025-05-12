@@ -75,10 +75,10 @@ function App() {
     );
 
   return (
-    <div>
+    <>
       <Notifications />
       <RouterProvider router={mainRouter} />
-    </div>
+    </>
   );
 }
 

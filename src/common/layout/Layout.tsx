@@ -32,7 +32,9 @@ const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
           </button>
         </div>
       </header>
-      <Outlet />
+      <div className={classes.pageContainer}>
+        <Outlet />
+      </div>
     </>
   );
 };

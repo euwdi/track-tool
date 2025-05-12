@@ -1,5 +1,6 @@
 import { toolsService } from "@/network/toolsService";
 import { Tool } from "@/types/tools.types";
+import { AxiosError } from "axios";
 import { create } from "zustand";
 
 interface ToolsState {
@@ -28,7 +29,7 @@ interface ToolsState {
   }: {
     toolId: string;
     toStorageId: string;
-  }) => void;
+  }) => Promise<void>;
   deleteTool: ({ toolId }: { toolId: string }) => Promise<void>;
 }
 
@@ -72,7 +73,8 @@ const useToolsStore = create<ToolsState>()((set, get) => ({
       get().getTools();
     } catch (err) {
       console.error("moveTool failed", err);
-      throw err;
+      if (err instanceof AxiosError)
+        throw new Error(err.response?.data.message || err.message);
     }
   },
   deleteTool: async ({ toolId }) => {

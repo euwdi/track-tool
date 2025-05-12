@@ -13,8 +13,7 @@ type Tab = {
 const Menu: FC = () => {
   const navigator = useNavigate();
   const baseRoutePath = useRoutePath();
-  console.log(baseRoutePath);
-
+  
   const menuTabs: Tab[] = useMenuItems();
   return (
     <>

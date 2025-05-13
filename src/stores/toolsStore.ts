@@ -1,16 +1,18 @@
 import { toolsService } from "@/network/toolsService";
-import { Tool } from "@/types/tools.types";
+import { Tool, ToolType } from "@/types/tools.types";
 import { AxiosError } from "axios";
 import { create } from "zustand";
 
 interface ToolsState {
   tools: Tool[];
+  types: ToolType[];
   myTools: Tool[];
   currentTool?: Tool;
   moveToolId: string | undefined;
   setCurrentTool: (currentTool: Tool | undefined) => void;
   setMoveToolId: (toolId: string | undefined) => void;
   getTools: () => void;
+  getToolTypes: () => void;
   getMyTools: () => void;
   createTool: ({
     name,
@@ -35,6 +37,7 @@ interface ToolsState {
 
 const useToolsStore = create<ToolsState>()((set, get) => ({
   tools: [],
+  types: [],
   myTools: [],
   currentTool: undefined,
   moveToolId: undefined,
@@ -42,6 +45,14 @@ const useToolsStore = create<ToolsState>()((set, get) => ({
     try {
       const tools = await toolsService.getTools();
       set(() => ({ tools }));
+    } catch (err) {
+      console.error("get tools failed", err);
+    }
+  },
+  getToolTypes: async () => {
+    try {
+      const types = await toolsService.getToolTypes();
+      set(() => ({ types }));
     } catch (err) {
       console.error("get tools failed", err);
     }

@@ -69,6 +69,7 @@ const PickStorageIdComponent: FC<PropsWithChildren<Props>> = ({ onChange }) => {
       <div className={classes.dropdown}>
         <Dropdown
           options={options}
+          placeholder="Местоположение"
           onSelect={(roleId) => {
             onChange(roleId);
           }}

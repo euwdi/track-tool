@@ -18,6 +18,11 @@ export type Tool = {
   photos: Photo[];
 };
 
+export type ToolType = {
+  id: string;
+  description: string;
+};
+
 export type Photo = {
   url: string;
   date: string;

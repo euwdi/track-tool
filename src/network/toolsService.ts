@@ -8,6 +8,12 @@ class ToolsService {
     return response.data;
   }
 
+  public async getToolTypes() {
+    const response = await axios.get<Tool[]>("/api/tools/types");
+
+    return response.data;
+  }
+
   public async getMyTools() {
     const response = await axios.get<Tool[]>("/api/tools/me");
 

@@ -8,7 +8,7 @@ import { useUsersStore } from "@/stores/usersStore";
 import { CreateUserModal } from "./createUserModal/CreateUserModal";
 
 const UsersPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
-  const { getUsers, users } = useUsersStore();
+  const { users, getUsers } = useUsersStore();
   const [filterText, setFilterText] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const UsersPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       .map((user) => ({
         fields: [
           user.lastName + " " + user.firstName + " " + user.middleName,
-          user.title,
+          user.title.name,
           user.roleName,
           user.phone,
         ],

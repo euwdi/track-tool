@@ -12,9 +12,14 @@ export type User = {
   roleId: string;
   startDate: Date;
   roleName: string;
-  title: string;
+  title: Title;
 
-  storages: Storage[]
+  storages: Storage[];
+};
+
+type Title = {
+  id: string;
+  name: string;
 };
 
 export type CreateUser = {

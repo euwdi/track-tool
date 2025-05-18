@@ -6,9 +6,11 @@ import { NavLink, useNavigate } from "react-router";
 import Logo from "@/assets/logo.svg?react";
 import { Routes } from "@/router/router";
 import { useUserStore } from "@/stores/userStore";
+import { useNotifications } from "@/stores/notificationsStore";
 
 const LoginForm: FC = () => {
   const navigator = useNavigate();
+  const { addNotification } = useNotifications();
   const isAuth = useUserStore((state) => state.isAuth);
   const { login: fetchLogin } = useUserStore((state) => state);
   const [login, setLogin] = useState<string>("");
@@ -16,7 +18,13 @@ const LoginForm: FC = () => {
 
   const onSubmitClick = () => {
     if (login.trim() && password.trim()) {
-      fetchLogin(login, password);
+      fetchLogin(login, password).catch((e) => {
+        addNotification({
+          message: `Ошибка при входе: ${e.message}`,
+          type: "error",
+          duration: 3000,
+        });
+      });
     }
   };
 

@@ -2,13 +2,14 @@ import { authService } from "@/network/authService";
 import { tokenService } from "@/network/tokenService";
 import { usersService } from "@/network/usersService";
 import { User } from "@/types/users.types";
+import { AxiosError } from "axios";
 import { create } from "zustand";
 
 interface UserState {
   isAuth: boolean;
   isLoading: boolean;
   profile: User;
-  login: (login: string, password: string) => void;
+  login: (login: string, password: string) => Promise<void>;
   logout: () => void;
   getProfile: () => void;
 }
@@ -31,8 +32,10 @@ const useUserStore = create<UserState>()((set) => ({
 
       set(() => ({ isAuth: true, profile, isLoading: false }));
     } catch (err) {
-      console.error("Authentication failed", err);
+      console.error("moveTool failed", err);
       set(() => ({ isLoading: false }));
+      if (err instanceof AxiosError)
+        throw new Error(err.response?.data.message || err.message);
     }
   },
   logout: () => {

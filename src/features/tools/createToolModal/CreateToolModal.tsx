@@ -24,6 +24,15 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
       return;
     }
 
+    if (!type) {
+      addNotification({
+        message: "Выберите тип инструмента",
+        type: "warning",
+        duration: 3000,
+      });
+      return;
+    }
+
     createTool({ name, description, typeId: type, storageId });
     onCloseModal();
   };
@@ -49,30 +58,43 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
   return (
     <div className={classes.container}>
       <span className={classes.title}>Добавление оборудования</span>
-      <Input
-        placeholder="Название"
-        inputType="outline"
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
-      <Input
-        placeholder="Описание"
-        inputType="outline"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <Dropdown
-        options={options}
-        placeholder="Тип инструмента"
-        onSelect={(typeId) => {
-          setType(typeId);
-        }}
-      />
-      <PickStorageIdComponent onChange={setStorageId} />
+      <div className={classes.specItem}>
+        Название оборудования*
+        <Input
+          placeholder="Введите название"
+          inputType="outline"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+      </div>
+      <div className={classes.specItem}>
+        Описание оборудования
+        <Input
+          placeholder="Введите описание"
+          inputType="outline"
+          value={description}
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+      </div>
+      <div className={classes.specItem}>
+        Тип инструмента*
+        <Dropdown
+          options={options}
+          placeholder="Выберите тип"
+          onSelect={(typeId) => {
+            setType(typeId);
+          }}
+        />
+      </div>
+
+      <div className={classes.specItem}>
+        Местоположение*
+        <PickStorageIdComponent onChange={setStorageId} />
+      </div>
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal}>
           Отменить

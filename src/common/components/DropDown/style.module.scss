@@ -1,54 +1,59 @@
-/* Dropdown.module.scss */
-
 .dropdown {
-    position: relative;
+  position: relative;
 
-    font-weight: 400;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0%;
+
+  button {
+    width: 100%;
+    padding: 8px 20px;
+    border: 1.5px solid #9d9d9d;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
     font-size: 14px;
     line-height: 18px;
-    letter-spacing: 0%;
-  
-    button {
-      width: 100%;
-      padding: 8px 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      cursor: pointer;
-      text-align: left;
-      font-size: 14px;
 
-      white-space: nowrap;
-  
-      &:hover {
-        background-color: #f9f9f9;
-      }
-    }
-  
-    ul {
-      overflow: auto;
-      max-height: 200px;
+    white-space: nowrap;
 
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      margin-top: 4px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #fff;
-      z-index: 1000;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-  
-      li {
-        padding: 8px 20px;
-        cursor: pointer;
-        font-size: 14px;
-  
-        &:hover {
-          background-color: #f0f0f0;
-        }
-      }
+    &:hover {
+      background-color: #f9f9f9;
     }
   }
+
+  .list {
+    overflow: auto;
+    max-height: 200px;
+
+    position: absolute;
+
+    right: 0;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 8px 20px;
+      cursor: pointer;
+      font-size: 14px;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+
+    top: 100%;
+    left: 0;
+  }
+  .up {
+    bottom: 100%;
+    top: auto;
+  }
+}

@@ -8,13 +8,26 @@
   gap: 16px;
 
   .title {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 
     font-weight: 400;
     font-size: 30px;
   }
 
+  .specItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    input {
+      max-width: 600px;
+      border-radius: 8px;
+    }
+  }
+
   .row {
+    margin-top: 10px;
+
     display: flex;
     gap: 20px;
   }

@@ -40,7 +40,7 @@ const PickStorageIdComponent: FC<PropsWithChildren<Props>> = ({ onChange }) => {
         };
       });
     }
-  }, [tab, users]);
+  }, [tab, users, storages]);
 
   return (
     <div className={classes.container}>
@@ -69,7 +69,7 @@ const PickStorageIdComponent: FC<PropsWithChildren<Props>> = ({ onChange }) => {
       <div className={classes.dropdown}>
         <Dropdown
           options={options}
-          placeholder="Местоположение"
+          placeholder="Выберите местоположение"
           onSelect={(roleId) => {
             onChange(roleId);
           }}

@@ -10,7 +10,7 @@ import { useUserStore } from "@/stores/userStore";
 const LoginForm: FC = () => {
   const navigator = useNavigate();
   const isAuth = useUserStore((state) => state.isAuth);
-  const { login: fetchLogin, getProfile } = useUserStore((state) => state);
+  const { login: fetchLogin } = useUserStore((state) => state);
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -54,6 +54,7 @@ const LoginForm: FC = () => {
             setPassword(e.target.value);
           }}
           inputType="outline"
+          type="password"
         />
       </div>
 
@@ -61,14 +62,14 @@ const LoginForm: FC = () => {
         Войти
       </Button>
 
-      <div className={classes.row}>
+      {/* <div className={classes.row}>
         <NavLink to={""} className={classes.link}>
           Восстановить пароль
         </NavLink>
         <NavLink to={"/register"} className={classes.link}>
           Зарегистрироваться
         </NavLink>
-      </div>
+      </div> */}
 
       <Logo className={classes.logo} />
     </div>

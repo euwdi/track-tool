@@ -1,10 +1,13 @@
 import { FC, PropsWithChildren } from "react";
 import classes from "./style.module.scss";
 
+type ButtonVariant = "solid" | "outline" | "text";
+
 type Props = {
   onClick: () => void;
   fullWidth?: boolean;
   disabled?: boolean;
+  variant?: ButtonVariant;
 };
 
 const Button: FC<PropsWithChildren<Props>> = ({
@@ -12,18 +15,19 @@ const Button: FC<PropsWithChildren<Props>> = ({
   fullWidth,
   onClick,
   disabled,
+  variant = "solid",
 }) => {
   return (
-    <>
-      <button
-        className={`${classes.button} ${fullWidth ? "full-width" : ""}`}
-        onClick={onClick}
-        disabled={disabled}
-      >
-        {children}
-        <div className={classes.ripple} />
-      </button>
-    </>
+    <button
+      className={`${classes.button} ${classes[variant]} ${
+        fullWidth ? classes.fullWidth : ""
+      }`}
+      onClick={onClick}
+      disabled={disabled}
+      data-variant={variant}
+    >
+      {children}
+    </button>
   );
 };
 

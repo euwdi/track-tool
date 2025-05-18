@@ -20,7 +20,7 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
         type: "warning",
         duration: 3000,
       });
-      return
+      return;
     }
     if (moveToolId) {
       moveTool({ toolId: moveToolId, toStorageId })
@@ -47,7 +47,7 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
       <div className={classes.title}> Передача оборудования</div>
       <PickStorageIdComponent onChange={setToStorageId} />
       <div className={classes.row}>
-        <Button fullWidth onClick={onCloseModal}>
+        <Button fullWidth onClick={onCloseModal} variant="outline">
           Отменить
         </Button>
         <Button

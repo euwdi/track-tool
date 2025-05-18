@@ -119,7 +119,7 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
       />
 
       <div className={classes.row}>
-        <Button fullWidth onClick={onCloseModal}>
+        <Button fullWidth onClick={onCloseModal} variant="outline">
           Отменить
         </Button>
         <Button

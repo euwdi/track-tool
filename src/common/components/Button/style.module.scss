@@ -2,52 +2,72 @@
 
 .button {
   padding: 8px 14px;
-
-  background-color: $button-color;
-
-  transition: background-color 0.5s ease-out;
+  transition: all 0.3s ease-out;
   border-radius: 20px;
-
-  border: none;
-
   cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
 
   &:disabled {
-    background-color: $button-disabled-color;
-    cursor: inherit;
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 
-  &:not(:disabled):hover,
-  &:not(:disabled):focus {
-    background-color: $button-hover-color;
-    box-shadow: 0 0 3px rgba(0, 0, 0);
-  }
+  &.solid {
+    background-color: $button-color;
+    color: black;
+    border: none;
 
-  &:not(:disabled):active {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      background-color: $button-hover-color;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-  }
-
-  @keyframes example {
-    0% {
-      transform: translate(0, 0);
-      background-color: #008cba;
-    }
-    25% {
-      transform: translate(150px, 150px);
-      background-color: #008cba;
-    }
-    50% {
-      transform: translate(300px, 0);
-      background-color: #99008c;
-    }
-    75% {
-      transform: translate(150px, -150px);
-      background-color: #008cba;
-    }
-    100% {
-      transform: translate(0, 0);
-      background-color: #008cba;
+    &:disabled {
+      background-color: $button-disabled-color;
     }
   }
 
+  &.outline {
+    background-color: transparent;
+    color: black;
+    border: 2px solid $button-color;
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      background-color: rgba($button-color, 0.08);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &:disabled {
+      border-color: $button-disabled-color;
+      color: $button-disabled-color;
+    }
+  }
+
+  &.text {
+    background-color: transparent;
+    color: $button-color;
+    border: none;
+    padding: 8px 10px;
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      background-color: rgba($button-color, 0.08);
+    }
+
+    &:disabled {
+      color: $button-disabled-color;
+    }
+  }
+  &.fullWidth {
+    width: 100%;
+    display: flex;
+  }
 }

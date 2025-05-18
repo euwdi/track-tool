@@ -111,7 +111,7 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
         <PickStorageIdComponent onChange={setStorageId} />
       </div>
       <div className={classes.row}>
-        <Button fullWidth onClick={onCloseModal}>
+        <Button fullWidth onClick={onCloseModal} variant="outline">
           Отменить
         </Button>
 

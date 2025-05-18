@@ -21,6 +21,20 @@ class UsersService {
 
     return response.data;
   }
+
+  public async getTitles() {
+    const response = await axios.get("/api/titles");
+
+    return response.data;
+  }
+
+  public async createTitle({ name }: { name: string }) {
+    const response = await axios.post("/api/titles", {
+      name,
+    });
+
+    return response.data;
+  }
 }
 
 const usersService = new UsersService();

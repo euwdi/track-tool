@@ -17,7 +17,7 @@ export type User = {
   storages: Storage[];
 };
 
-type Title = {
+export type Title = {
   id: string;
   name: string;
 };
@@ -31,5 +31,5 @@ export type CreateUser = {
   phone: string;
   roleId: string;
   startDate: Date;
-  //title: string;
+  titleId: string;
 };

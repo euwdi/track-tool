@@ -1,15 +1,20 @@
 import { usersService } from "@/network/usersService";
-import { CreateUser, User } from "@/types/users.types";
+import { CreateUser, Title, User } from "@/types/users.types";
+import { AxiosError } from "axios";
 import { create } from "zustand";
 
 interface UsersState {
   users: User[];
+  titles: Title[];
   getUsers: () => void;
-  createUser: (user: CreateUser) => void;
+  createUser: (user: CreateUser) => Promise<void>;
+  getTitles: () => void;
+  createTitle: ({ name }: { name: string }) => Promise<void>;
 }
 
-const useUsersStore = create<UsersState>()((set) => ({
+const useUsersStore = create<UsersState>()((set, get) => ({
   users: [],
+  titles: [],
   getUsers: async () => {
     try {
       const users = await usersService.getUsers();
@@ -24,7 +29,25 @@ const useUsersStore = create<UsersState>()((set) => ({
       const users = await usersService.getUsers();
       set(() => ({ users }));
     } catch (err) {
-      console.error("createStoragefailed", err);
+      console.error("moveTool failed", err);
+      if (err instanceof AxiosError)
+        throw new Error(err.response?.data.message || err.message);
+    }
+  },
+  getTitles: async () => {
+    try {
+      const titles = await usersService.getTitles();
+      set(() => ({ titles }));
+    } catch (err) {
+      console.error("getTitles failed", err);
+    }
+  },
+  createTitle: async ({ name }: { name: string }) => {
+    try {
+      await usersService.createTitle({ name });
+      get().getTitles();
+    } catch (err) {
+      console.error("getTitles failed", err);
     }
   },
 }));

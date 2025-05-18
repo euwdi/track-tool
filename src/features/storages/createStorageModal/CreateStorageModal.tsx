@@ -3,53 +3,71 @@ import classes from "./style.module.scss";
 import { Button } from "@/common/components/Button/Button";
 import { Input } from "@/common/components/Input/Input";
 import { useStoragesStore } from "@/stores/storagesStore";
+import { useNotifications } from "@/stores/notificationsStore";
 
 type Props = {
   onCloseModal: () => void;
 };
 
 const CreateStorageModal: FC<Props> = ({ onCloseModal }) => {
-  const { createStorage, getStorages } = useStoragesStore();
+  const { createStorage } = useStoragesStore();
+  const { addNotification } = useNotifications();
   const onClickCreateStorage = () => {
-    createStorage({ name, address });
-    // onCloseModal();
+    if (!name || !address) {
+      addNotification({
+        message: "Задайте имя и адрес склада",
+        type: "warning",
+        duration: 3000,
+      });
+      return;
+    }
+
+    createStorage({ name, address })
+      .then(() => {
+        addNotification({
+          message: `Склад успешно создан`,
+          type: "success",
+          duration: 3000,
+        });
+        onCloseModal();
+      })
+      .catch((e) => {
+        addNotification({
+          message: `Ошибка при создании склада: ${e.message}`,
+          type: "error",
+          duration: 3000,
+        });
+      });
+    onCloseModal();
   };
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
 
-  // const [filterText, setFilterText] = useState("");
-
-  // useEffect(() => {
-  //   getMyTools();
-  // }, []);
-
-  // const tableData = useMemo(() => {
-  //   return myTools
-  //     .filter((tool) =>
-  //       tool.name.toLowerCase().includes(filterText.toLowerCase())
-  //     )
-  //     .map((tool) => [tool.name, tool.description]);
-  // }, [filterText, myTools]);
-  // const canAddTools = false;
-
   return (
     <div className={classes.container}>
-      <Input
-        placeholder="Название"
-        inputType="outline"
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
-      <Input
-        placeholder="Адрес"
-        inputType="outline"
-        value={address}
-        onChange={(e) => {
-          setAddress(e.target.value);
-        }}
-      />
+      <span className={classes.title}>Добавление склада</span>
+      <div className={classes.specItem}>
+        Название склада*
+        <Input
+          placeholder="Введите название склада"
+          inputType="outline"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+      </div>
+      <div className={classes.specItem}>
+        Адрес склада*
+        <Input
+          placeholder="Адрес"
+          inputType="outline"
+          value={address}
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
+        />
+      </div>
 
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal}>

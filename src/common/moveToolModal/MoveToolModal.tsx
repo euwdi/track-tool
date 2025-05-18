@@ -14,6 +14,14 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
   const { moveToolId, moveTool } = useToolsStore();
 
   const onClickCreateTool = () => {
+    if (!toStorageId) {
+      addNotification({
+        message: `Выберите место назначения`,
+        type: "warning",
+        duration: 3000,
+      });
+      return
+    }
     if (moveToolId) {
       moveTool({ toolId: moveToolId, toStorageId })
         .then(() => {
@@ -33,11 +41,11 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
         });
     }
   };
-  const [toStorageId, setToStorageId] = useState("67a3178a49f85d137a6bb730");
+  const [toStorageId, setToStorageId] = useState("");
   return (
     <div className={classes.container}>
+      <div className={classes.title}> Передача оборудования</div>
       <PickStorageIdComponent onChange={setToStorageId} />
-
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal}>
           Отменить

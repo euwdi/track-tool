@@ -150,6 +150,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
       >
         <div className={classes.deleteModal}>
           Вы уверены, что хотите удалить оборудование?
+          <span className={classes.warning}>Это действие будет иметь последствия!</span>
           <div className={classes.row}>
             <div className={classes.fill}>
               <Button fullWidth onClick={() => setOpenedDeleteModal(false)}>

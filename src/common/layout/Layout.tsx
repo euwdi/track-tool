@@ -7,6 +7,7 @@ import ProfileIcon from "@/assets/profile.svg?react";
 import { Routes } from "@/router/router";
 import { useUserStore } from "@/stores/userStore";
 import { Menu } from "@/common/components/Menu/Menu";
+import UserProfileDropdown from "@/features/users/userProfileDropdown/UserProfileDropdown";
 
 const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   const navigator = useNavigate();
@@ -20,8 +21,9 @@ const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
 
         <div className={classes.actionsContainer}>
           <Menu />
-          <ProfileIcon className={classes.actionIcon} />
-          <button
+          {/* <ProfileIcon className={classes.actionIcon} /> */}
+          <UserProfileDropdown />
+          {/* <button
             className={classes.logoutButton}
             onClick={() => {
               navigator(`/${Routes.LOGIN}`);
@@ -29,7 +31,7 @@ const Layout: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
             }}
           >
             Выход
-          </button>
+          </button> */}
         </div>
       </header>
       <div className={classes.pageContainer}>

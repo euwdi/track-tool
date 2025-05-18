@@ -1,13 +1,17 @@
 .container {
-  min-width: 500px;
-  min-height: 500px;
-
-  padding: 40px 20px;
+  min-width: 400px;
 
   display: flex;
   flex-direction: column;
 
   gap: 16px;
+
+  .title {
+    margin-bottom: 8px;
+
+    font-weight: 400;
+    font-size: 30px;
+  }
 
   .top-container {
     display: flex;
@@ -18,9 +22,20 @@
     line-height: 38px;
     letter-spacing: 0%;
   }
+
+  .specItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    input {
+      max-width: 600px;
+      border-radius: 8px;
+    }
+  }
   .row {
+    margin-top: 15px;
     display: flex;
     gap: 20px;
-
   }
 }

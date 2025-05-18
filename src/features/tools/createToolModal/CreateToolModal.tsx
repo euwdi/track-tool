@@ -33,7 +33,22 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
       return;
     }
 
-    createTool({ name, description, typeId: type, storageId });
+    createTool({ name, description, typeId: type, storageId })
+      .then(() => {
+        addNotification({
+          message: `Инструмент успешно создан`,
+          type: "success",
+          duration: 3000,
+        });
+        onCloseModal();
+      })
+      .catch((e) => {
+        addNotification({
+          message: `Ошибка при создании инструмента: ${e.message}`,
+          type: "error",
+          duration: 3000,
+        });
+      });
     onCloseModal();
   };
   const [name, setName] = useState("");

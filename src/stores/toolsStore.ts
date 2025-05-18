@@ -24,7 +24,7 @@ interface ToolsState {
     description: string;
     typeId: string;
     storageId: string;
-  }) => void;
+  }) => Promise<void>;
   moveTool: ({
     toolId,
     toStorageId,
@@ -72,7 +72,9 @@ const useToolsStore = create<ToolsState>()((set, get) => ({
       get().getMyTools();
       get().getTools();
     } catch (err) {
-      console.error("createTool failed", err);
+      console.error("moveTool failed", err);
+      if (err instanceof AxiosError)
+        throw new Error(err.response?.data.message || err.message);
     }
   },
 

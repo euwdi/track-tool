@@ -7,13 +7,15 @@ import { useRolesStore } from "@/stores/rolesStore";
 import Dropdown from "@/common/components/DropDown/Dropdown";
 import Calendar from "@/common/components/Calendar/Calendar";
 import { useNotifications } from "@/stores/notificationsStore";
+import { Modal } from "@/common/components/Modal/Modal";
+import EditSpecList from "@/common/EditSpecList/EditSpecList";
 
 type Props = {
   onCloseModal: () => void;
 };
 
 const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
-  const { titles, createUser, getTitles } = useUsersStore();
+  const { titles, createUser, getTitles, createTitle } = useUsersStore();
   const { addNotification } = useNotifications();
   const { roles, getRoles } = useRolesStore();
 
@@ -64,6 +66,8 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
   const [roleId, setRoleId] = useState("");
   const [phone, setPhone] = useState("");
   const [startDate, setStartDate] = useState(new Date());
+
+  const [openSpecsModal, setOpenSpecsModal] = useState<"title" | "">("");
 
   useEffect(() => {
     getRoles();
@@ -138,6 +142,9 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
           onSelect={(titleId) => {
             setTitle(titleId);
           }}
+          onClickEdit={() => {
+            setOpenSpecsModal("title");
+          }}
         />
       </div>
       <div className={classes.specItem}>
@@ -173,6 +180,25 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
           }}
         />
       </div>
+
+      <Modal
+        isOpen={!!openSpecsModal}
+        onClose={() => {
+          setOpenSpecsModal("");
+        }}
+      >
+        <EditSpecList
+          onAdd={({ name }: { name: string }) => {
+            createTitle({ name });
+          }}
+          onRefresh={getTitles}
+          items={titles}
+          title={"Должности сотрудников"}
+          onEdit={function ({ id, name }: { id: string; name: string }): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      </Modal>
 
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal} variant="outline">

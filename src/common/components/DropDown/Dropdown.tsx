@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./style.module.scss";
+import EditIcon from "@/assets/edit.svg?react";
 
 interface Option {
   label: string;
@@ -11,12 +12,14 @@ interface DropdownProps {
   options: Option[];
   onSelect?: (option: string) => void;
   placeholder?: string;
+  onClickEdit?: () => void;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   onSelect,
   placeholder,
+  onClickEdit,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -93,6 +96,12 @@ const Dropdown: React.FC<DropdownProps> = ({
       <button ref={buttonRef} onClick={toggleDropdown}>
         {selectedOption || lplaceholder}
       </button>
+
+      {onClickEdit && (
+        <button className={styles.editButton} onClick={onClickEdit}>
+          <EditIcon />
+        </button>
+      )}
 
       {isOpen && (
         <ul

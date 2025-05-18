@@ -6,6 +6,8 @@ import { useToolsStore } from "@/stores/toolsStore";
 import { PickStorageIdComponent } from "@/common/PickStorageIdComponent/PickStorageIdComponent";
 import { useNotifications } from "@/stores/notificationsStore";
 import Dropdown from "@/common/components/DropDown/Dropdown";
+import { Modal } from "@/common/components/Modal/Modal";
+import EditSpecList from "@/common/EditSpecList/EditSpecList";
 
 type Props = {
   onCloseModal: () => void;
@@ -13,7 +15,8 @@ type Props = {
 
 const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
   const { addNotification } = useNotifications();
-  const { createTool } = useToolsStore();
+  const { types, getToolTypes, createTool } = useToolsStore();
+
   const onClickCreateTool = () => {
     if (!name || !storageId) {
       addNotification({
@@ -54,8 +57,9 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
-  const { types, getToolTypes } = useToolsStore();
   const [storageId, setStorageId] = useState("");
+
+  const [openSpecsModal, setOpenSpecsModal] = useState<"type" | "">("");
 
   useEffect(() => {
     getToolTypes();
@@ -103,6 +107,9 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
           onSelect={(typeId) => {
             setType(typeId);
           }}
+          onClickEdit={() => {
+            setOpenSpecsModal("type");
+          }}
         />
       </div>
 
@@ -110,6 +117,29 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
         Местоположение*
         <PickStorageIdComponent onChange={setStorageId} />
       </div>
+
+      <Modal
+        isOpen={!!openSpecsModal}
+        onClose={() => {
+          setOpenSpecsModal("");
+        }}
+      >
+        <EditSpecList
+          title={"Типы инструментов"}
+          onAdd={({ name }: { name: string }) => {}}
+          onRefresh={getToolTypes}
+          items={types.map((type) => {
+            return {
+              name: type.description,
+              id: type.id,
+            };
+          })}
+          onEdit={function ({ id, name }: { id: string; name: string }): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      </Modal>
+
       <div className={classes.row}>
         <Button fullWidth onClick={onCloseModal} variant="outline">
           Отменить

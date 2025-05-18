@@ -13,6 +13,7 @@ interface ToolsState {
   setMoveToolId: (toolId: string | undefined) => void;
   getTools: () => void;
   getToolTypes: () => void;
+  createToolType: ({ name }: { name: string }) => void;
   getMyTools: () => void;
   createTool: ({
     name,
@@ -54,7 +55,19 @@ const useToolsStore = create<ToolsState>()((set, get) => ({
       const types = await toolsService.getToolTypes();
       set(() => ({ types }));
     } catch (err) {
-      console.error("get tools failed", err);
+      console.error("getToolTypes failed", err);
+      if (err instanceof AxiosError)
+        throw new Error(err.response?.data.message || err.message);
+    }
+  },
+  createToolType: async ({ name }: { name: string }) => {
+    try {
+      await toolsService.createToolType({ name });
+      get().getToolTypes();
+    } catch (err) {
+      console.error("createToolTypes failed", err);
+      if (err instanceof AxiosError)
+        throw new Error(err.response?.data.message || err.message);
     }
   },
   getMyTools: async () => {

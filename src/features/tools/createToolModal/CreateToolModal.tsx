@@ -15,7 +15,7 @@ type Props = {
 
 const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
   const { addNotification } = useNotifications();
-  const { types, getToolTypes, createTool } = useToolsStore();
+  const { types, getToolTypes, createTool, createToolType } = useToolsStore();
 
   const onClickCreateTool = () => {
     if (!name || !storageId) {
@@ -126,7 +126,9 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
       >
         <EditSpecList
           title={"Типы инструментов"}
-          onAdd={({ name }: { name: string }) => {}}
+          onAdd={({ name }: { name: string }) => {
+            createToolType({ name });
+          }}
           onRefresh={getToolTypes}
           items={types.map((type) => {
             return {

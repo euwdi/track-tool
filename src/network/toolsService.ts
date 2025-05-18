@@ -14,6 +14,12 @@ class ToolsService {
     return response.data;
   }
 
+  public async createToolType({ name }: { name: string }) {
+    const response = await axios.post("/api/tools/types", { name });
+
+    return response.data;
+  }
+
   public async getMyTools() {
     const response = await axios.get<Tool[]>("/api/tools/me");
 

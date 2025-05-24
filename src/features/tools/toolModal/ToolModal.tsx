@@ -28,7 +28,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
     if (currentTool)
       moveTool({
         toolId: currentTool?.id,
-        toStorageId: profile.storages[0].id,
+        storageId: profile.storages[0].id,
       });
     onCloseModal();
   };

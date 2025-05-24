@@ -61,13 +61,13 @@ class ToolsService {
 
   public async moveTool({
     toolId,
-    toStorageId,
+    storageId,
   }: {
     toolId: string;
-    toStorageId: string;
+    storageId: string;
   }) {
     const response = await axios.patch(`/api/tools/${toolId}`, {
-      toStorageId,
+      storageId,
     });
 
     return response.data;

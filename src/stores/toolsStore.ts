@@ -29,10 +29,10 @@ interface ToolsState {
   }) => Promise<void>;
   moveTool: ({
     toolId,
-    toStorageId,
+    storageId,
   }: {
     toolId: string;
-    toStorageId: string;
+    storageId: string;
   }) => Promise<void>;
   deleteTool: ({ toolId }: { toolId: string }) => Promise<void>;
 }
@@ -92,9 +92,9 @@ const useToolsStore = create<ToolsState>()((set, get) => ({
     }
   },
 
-  moveTool: async ({ toolId, toStorageId }) => {
+  moveTool: async ({ toolId, storageId }) => {
     try {
-      await toolsService.moveTool({ toolId, toStorageId });
+      await toolsService.moveTool({ toolId, storageId });
 
       get().getMyTools();
       get().getTools();

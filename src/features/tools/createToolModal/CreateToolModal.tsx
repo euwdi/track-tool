@@ -43,7 +43,15 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
       return;
     }
 
-    createTool({ name, description, typeId: type, storageId })
+    const dataPhotos = photos.map((photo) => photo.id);
+
+    createTool({
+      name,
+      description,
+      typeId: type,
+      storageId,
+      photos: dataPhotos,
+    })
       .then(() => {
         addNotification({
           message: `Инструмент успешно создан`,

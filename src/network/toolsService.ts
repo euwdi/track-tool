@@ -31,11 +31,13 @@ class ToolsService {
     description,
     typeId,
     storageId,
+    photos,
   }: {
     name: string;
     description: string;
     typeId: string;
     storageId: string;
+    photos: string[];
   }) {
     const response = await axios.post("/api/tools", {
       name,
@@ -43,6 +45,7 @@ class ToolsService {
       typeId,
       storageId,
       startDate: new Date(),
+      photos,
     });
 
     // {

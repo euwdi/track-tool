@@ -25,6 +25,7 @@ interface ToolsState {
     description: string;
     typeId: string;
     storageId: string;
+    photos: string[];
   }) => Promise<void>;
   moveTool: ({
     toolId,
@@ -78,9 +79,9 @@ const useToolsStore = create<ToolsState>()((set, get) => ({
       console.error("get tools failed", err);
     }
   },
-  createTool: async ({ name, description, typeId, storageId }) => {
+  createTool: async ({ name, description, typeId, storageId, photos }) => {
     try {
-      await toolsService.createTool({ name, description, typeId, storageId });
+      await toolsService.createTool({ name, description, typeId, storageId, photos });
 
       get().getMyTools();
       get().getTools();

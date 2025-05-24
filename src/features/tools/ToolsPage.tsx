@@ -103,7 +103,6 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
       <Modal
         isOpen={modalIsOpen}
         onClose={() => {
-          setModalIsOpen(false);
         }}
       >
         <CreateToolModal

@@ -1,5 +1,9 @@
 .container {
-  padding: 50px;
+  padding: 10px;
+
+  @media (min-width: 900px) {
+    padding: 50px;
+  }
 
   display: flex;
   flex-direction: column;

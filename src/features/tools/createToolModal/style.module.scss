@@ -1,8 +1,13 @@
 .container {
-  min-width: 500px;
-  min-height: 500px;
-  max-height: 80vh;
   overflow: auto;
+  max-height: 100vh;
+  padding: 40px 0;
+
+  @media (min-width: 900px) {
+    min-width: 500px;
+    min-height: 500px;
+    max-height: 80vh;
+  }
 
   display: flex;
   flex-direction: column;
@@ -34,10 +39,6 @@
     gap: 20px;
   }
 }
-
-
-
-
 
 .photoUploader {
   display: flex;
@@ -81,7 +82,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  
+
   button {
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -93,7 +94,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
+
     &:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -111,7 +112,7 @@
   padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
-  
+
   &:hover {
     background: rgba(255, 0, 0, 0.9);
   }
@@ -135,11 +136,11 @@
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
-  
+
   &:hover {
     background-color: #e0e0e0;
   }
-  
+
   input[type="file"] {
     display: none;
   }

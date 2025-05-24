@@ -125,7 +125,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
           </div>
         )}
         <div className={classes.deleteContainer}>
-          <Button fullWidth onClick={onClickDeleteTool}>
+          <Button fullWidth onClick={onClickDeleteTool} variant="text">
             Удалить инструмент
           </Button>
         </div>

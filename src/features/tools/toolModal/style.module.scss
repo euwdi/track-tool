@@ -1,15 +1,17 @@
 .container {
-  min-width: 500px;
-  min-height: 500px;
-  max-height: 80vh;
-  max-width: 80vw;
-
-  padding: 10px;
-
   display: flex;
   flex-direction: column;
 
   gap: 16px;
+
+  padding: 10px;
+
+  @media (min-width: 900px) {
+    min-width: 500px;
+    min-height: 500px;
+    max-height: 80vh;
+    max-width: 80vw;
+  }
 
   .content-container {
     flex: 1;
@@ -123,20 +125,7 @@
     .outline {
       width: 100%;
       button {
-        font-weight: 500;
-        background-color: transparent;
         color: rgb(248, 51, 51);
-
-        &:hover,
-        &:active,
-        &:focus {
-          opacity: 0.8;
-          box-shadow: none;
-
-          color: inherit;
-
-          background-color: rgb(248, 51, 51);
-        }
       }
     }
 

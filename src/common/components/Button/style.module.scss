@@ -58,7 +58,7 @@
 
     &:not(:disabled):hover,
     &:not(:disabled):focus {
-      background-color: rgba($button-color, 0.08);
+      opacity: 0.8;
     }
 
     &:disabled {

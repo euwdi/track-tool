@@ -1,5 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
 import classes from "./style.module.scss";
+import CloseIcon from "@/assets/close.svg?react";
 
 type Props = {
   onClose: () => void;
@@ -18,9 +19,9 @@ const Modal: FC<PropsWithChildren<Props>> = ({ isOpen, onClose, children }) => {
   return (
     <div className={classes["modal-overlay"]} onClick={handleOverlayClick}>
       <div className={classes["modal"]}>
-        {/* <button className={classes["close-button"]} onClick={onClose}>
-          &times;
-        </button> */}
+        <button className={classes["close-button"]} onClick={onClose}>
+          <CloseIcon width={24} height={24}/>
+        </button>
         {children}
       </div>
     </div>

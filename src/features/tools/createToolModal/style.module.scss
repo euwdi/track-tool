@@ -1,13 +1,10 @@
 .container {
   overflow: auto;
-  max-height: 100vh;
-  padding: 40px 0;
-
   @media (min-width: 900px) {
     min-width: 500px;
     min-height: 500px;
     max-height: 80vh;
-    padding: 0;
+    padding: 10px;
   }
 
   display: flex;

@@ -48,8 +48,6 @@ const ToolsPage: FC<React.InputHTMLAttributes<HTMLInputElement>> = () => {
   }, [filterText, setMoveToolId, tools, status]);
   const canAddTools = false;
 
-  const onClickAddTool = () => {};
-
   return (
     <div className={classes.container}>
       <div className={classes.topContainer}>

@@ -13,32 +13,34 @@ type TProps = {
 
 const Table: FC<TProps> = ({ headers, data }) => {
   return (
-    <table className={classes.table}>
-      <tbody>
-        <tr>
-          {headers.map((header) => (
-            <th className={classes.tableHeaderCell}>{header}</th>
-          ))}
-        </tr>
-
-        {data.map((trData, index) => (
-          <tr
-            onClick={trData.onClick}
-            className={trData.onClick && classes.clickableRow}
-          >
-            {trData.fields.map((tdData) => (
-              <td
-                className={`${classes.tableCell} ${
-                  index % 2 === 1 ? classes.gray : classes.white
-                }`}
-              >
-                {tdData}
-              </td>
+    <div className={classes.container}>
+      <table className={classes.table}>
+        <tbody>
+          <tr>
+            {headers.map((header) => (
+              <th className={classes.tableHeaderCell}>{header}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+
+          {data.map((trData, index) => (
+            <tr
+              onClick={trData.onClick}
+              className={trData.onClick && classes.clickableRow}
+            >
+              {trData.fields.map((tdData) => (
+                <td
+                  className={`${classes.tableCell} ${
+                    index % 2 === 1 ? classes.gray : classes.white
+                  }`}
+                >
+                  {tdData}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

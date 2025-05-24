@@ -1,6 +1,8 @@
 .container {
   min-width: 500px;
   min-height: 500px;
+  max-height: 80vh;
+  overflow: auto;
 
   display: flex;
   flex-direction: column;
@@ -30,5 +32,115 @@
 
     display: flex;
     gap: 20px;
+  }
+}
+
+
+
+
+
+.photoUploader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.photoViewer {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.photoCounter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.photoControls {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  
+  button {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.deletePhotoButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  
+  &:hover {
+    background: rgba(255, 0, 0, 0.9);
+  }
+}
+
+.photoPlaceholder {
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.uploadButton {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  
+  input[type="file"] {
+    display: none;
   }
 }

@@ -8,9 +8,16 @@ import { useNotifications } from "@/stores/notificationsStore";
 import Dropdown from "@/common/components/DropDown/Dropdown";
 import { Modal } from "@/common/components/Modal/Modal";
 import EditSpecList from "@/common/EditSpecList/EditSpecList";
+import { photosService } from "@/network/photosService";
 
 type Props = {
   onCloseModal: () => void;
+};
+
+type UploadedPhoto = {
+  id: string;
+  url: string;
+  file: File;
 };
 
 const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
@@ -73,6 +80,80 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
       };
     });
   }, [types]);
+
+  const [photos, setPhotos] = useState<UploadedPhoto[]>([]);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handlePhotoUpload = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+
+    if (files.length + photos.length > 5) {
+      addNotification({
+        message: "Максимальное кол-во фотографий - 5",
+        type: "warning",
+        duration: 3000,
+      });
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      const newPhotos: UploadedPhoto[] = [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const response = await photosService.postPhoto({ photo: file });
+
+        newPhotos.push({
+          id: response.photoId,
+          url: URL.createObjectURL(file),
+          file,
+        });
+      }
+
+      setPhotos([...photos, ...newPhotos]);
+      addNotification({
+        message: "Фотографии успешно загружены",
+        type: "success",
+        duration: 3000,
+      });
+    } catch (e) {
+      addNotification({
+        message: `Ошибка при загрузке фотографий: ${e.message}`,
+        type: "error",
+        duration: 3000,
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handlePhotoDelete = async (photoId: string) => {
+    try {
+      await photosService.deletePhotoById({ photoId });
+      setPhotos(photos.filter((photo) => photo.id !== photoId));
+      if (currentPhotoIndex >= photos.length - 1) {
+        setCurrentPhotoIndex(Math.max(0, photos.length - 2));
+      }
+      addNotification({
+        message: "Фотография удалена",
+        type: "success",
+        duration: 3000,
+      });
+    } catch (e) {
+      addNotification({
+        message: `Ошибка при загрузке фотографий: ${e.message}`,
+        type: "error",
+        duration: 3000,
+      });
+    }
+  };
+
+  const onCancel = () => {
+    photos.map((photo) => handlePhotoDelete(photo.id));
+    onCloseModal();
+  };
 
   return (
     <div className={classes.container}>
@@ -142,8 +223,68 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
         />
       </Modal>
 
+      <div className={classes.specItem}>
+        Фотографии оборудования
+        <div className={classes.photoUploader}>
+          {photos.length > 0 ? (
+            <div className={classes.photoViewer}>
+              <div className={classes.photoCounter}>
+                {currentPhotoIndex + 1} / {photos.length}
+              </div>
+              <img
+                src={photos[currentPhotoIndex].url}
+                alt="Оборудование"
+                className={classes.photo}
+              />
+              <div className={classes.photoControls}>
+                <button
+                  onClick={() =>
+                    setCurrentPhotoIndex((prev) => Math.max(0, prev - 1))
+                  }
+                  disabled={currentPhotoIndex === 0}
+                >
+                  &lt;
+                </button>
+                <button
+                  onClick={() =>
+                    setCurrentPhotoIndex((prev) =>
+                      Math.min(photos.length - 1, prev + 1)
+                    )
+                  }
+                  disabled={currentPhotoIndex === photos.length - 1}
+                >
+                  &gt;
+                </button>
+              </div>
+              <button
+                className={classes.deletePhotoButton}
+                onClick={() => handlePhotoDelete(photos[currentPhotoIndex].id)}
+              >
+                Удалить
+              </button>
+            </div>
+          ) : (
+            <div className={classes.photoPlaceholder}>
+              Нет загруженных фотографий
+            </div>
+          )}
+
+          <label className={classes.uploadButton}>
+            {isUploading ? "Загрузка..." : "Загрузить фотографии"}
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={(e) => handlePhotoUpload(e.target.files)}
+              style={{ display: "none" }}
+              disabled={isUploading}
+            />
+          </label>
+        </div>
+      </div>
+
       <div className={classes.row}>
-        <Button fullWidth onClick={onCloseModal} variant="outline">
+        <Button fullWidth onClick={onCancel} variant="outline">
           Отменить
         </Button>
 

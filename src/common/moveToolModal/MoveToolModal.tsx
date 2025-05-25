@@ -23,7 +23,7 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
       return;
     }
     if (moveToolId) {
-      moveTool({ toolId: moveToolId, toStorageId })
+      moveTool({ toolId: moveToolId, storageId: toStorageId })
         .then(() => {
           addNotification({
             message: `Инструмент успешно перемещен`,

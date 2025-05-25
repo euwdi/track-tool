@@ -158,7 +158,7 @@ const ToolModal: FC<Props> = ({ onCloseModal, onMoveTool, canTakeTools }) => {
               </Button>
             </div>
             <div className={classes.outline}>
-              <Button fullWidth onClick={deleteToolF}>
+              <Button fullWidth onClick={deleteToolF} variant="text">
                 Абсолютно
               </Button>
             </div>

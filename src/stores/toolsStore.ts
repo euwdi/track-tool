@@ -13,7 +13,7 @@ interface ToolsState {
   setMoveToolId: (toolId: string | undefined) => void;
   getTools: () => void;
   getToolTypes: () => void;
-  createToolType: ({ name }: { name: string }) => void;
+  createToolType: ({ name }: { name: string }) => Promise<void>;
   getMyTools: () => void;
   createTool: ({
     name,

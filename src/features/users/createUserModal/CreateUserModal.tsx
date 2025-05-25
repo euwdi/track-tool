@@ -189,7 +189,21 @@ const CreateUserModal: FC<Props> = ({ onCloseModal }) => {
       >
         <EditSpecList
           onAdd={({ name }: { name: string }) => {
-            createTitle({ name });
+            createTitle({ name })
+              .then(() => {
+                addNotification({
+                  message: `Должность успешно создана`,
+                  type: "success",
+                  duration: 3000,
+                });
+              })
+              .catch((e) => {
+                addNotification({
+                  message: `Ошибка при создании должности: ${e.message}`,
+                  type: "error",
+                  duration: 3000,
+                });
+              });
           }}
           onRefresh={getTitles}
           items={titles}

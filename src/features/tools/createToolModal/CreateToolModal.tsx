@@ -216,7 +216,21 @@ const CreateToolModal: FC<Props> = ({ onCloseModal }) => {
         <EditSpecList
           title={"Типы инструментов"}
           onAdd={({ name }: { name: string }) => {
-            createToolType({ name });
+            createToolType({ name })
+              .then(() => {
+                addNotification({
+                  message: `Тип успешно создан`,
+                  type: "success",
+                  duration: 3000,
+                });
+              })
+              .catch((e) => {
+                addNotification({
+                  message: `Ошибка при создании типа: ${e.message}`,
+                  type: "error",
+                  duration: 3000,
+                });
+              });
           }}
           onRefresh={getToolTypes}
           items={types.map((type) => {

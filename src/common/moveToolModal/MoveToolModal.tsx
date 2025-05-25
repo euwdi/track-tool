@@ -13,7 +13,7 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
   const { addNotification } = useNotifications();
   const { moveToolId, moveTool } = useToolsStore();
 
-  const onClickCreateTool = () => {
+  const onSubmit = () => {
     if (!toStorageId) {
       addNotification({
         message: `Выберите место назначения`,
@@ -53,7 +53,7 @@ const MoveToolModal: FC<Props> = ({ onCloseModal }) => {
         <Button
           fullWidth
           onClick={() => {
-            onClickCreateTool();
+            onSubmit();
           }}
         >
           Сохранить

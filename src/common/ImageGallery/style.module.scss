@@ -14,9 +14,36 @@
   }
 }
 
+.close-button {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 20px;
+
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 10px;
+  border: 0;
+  border-radius: 0;
+  background: rgba(30, 30, 30, .6);
+  transition: color .3s ease;
+  cursor: pointer;
+  outline: none;
+
+  svg {
+    path {
+      fill: #ffffff;
+    }
+  }
+}
+
 .img {
   object-fit: cover;
   border-radius: 8px;
-  max-height: 80vh;
-  max-width: 80vw;
+  max-height: 96vh;
+  max-width: 96vh;
 }

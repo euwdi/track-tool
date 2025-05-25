@@ -1,15 +1,17 @@
 .container {
   max-width: 800px;
+  padding-bottom: 30px;
 
   .title {
-    margin-bottom: 8px;
-
     font-weight: 400;
     font-size: 24px;
   }
 
   .editButton {
-    padding: 0 10px;
+    display: flex;
+    align-items: center;
+
+    padding: 0 6px;
     width: min-content;
 
     border-radius: 8px;
@@ -38,7 +40,8 @@
   }
 
   .list {
-    padding: 16px 0;
+    padding: 8px 10px;
+    padding-bottom: 16px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -49,6 +52,10 @@
       display: flex;
 
       justify-content: space-between;
+
+      border: 1px solid #80808045;
+      padding: 4px 8px;
+      border-radius: 8px;
     }
   }
 }

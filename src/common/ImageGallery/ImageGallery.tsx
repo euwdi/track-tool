@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classes from "./style.module.scss";
 import { ImageModal } from "../components/ImageModal/ImageModal";
+import CloseIcon from "@/assets/close.svg?react";
 
 type Props = {
   images: string[];
@@ -28,17 +29,19 @@ const ImageGallery: React.FC<Props> = ({ images }) => {
             alt={`Image ${index + 1}`} // Генерируем alt автоматически
             onClick={() => openModal(src)}
           />
-          
         ))}
       </div>
       {selectedImage && (
-        <ImageModal isOpen={!!selectedImage} onClose={closeModal}>
+        <ImageModal onClose={closeModal}>
           <img
             className={classes.img}
             src={selectedImage}
             alt="Full-size preview"
             onClick={(e) => e.stopPropagation()} // Предотвращаем закрытие при клике на изображение
           />
+          <button className={classes["close-button"]} onClick={closeModal}>
+            <CloseIcon width={24} height={24} />
+          </button>
         </ImageModal>
       )}
     </>
